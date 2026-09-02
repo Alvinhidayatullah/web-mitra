@@ -242,7 +242,7 @@ export default function AdminPage() {
       {/* Tabs / Pagination */}
       <div className="bg-white border-b overflow-x-auto">
         <div className="max-w-7xl mx-auto px-4 sm:px-8 py-3 flex items-center gap-2">
-          {Object.entries(configs).map(([id, config], index) => (
+          {Object.keys(configs).map((id, index) => (
             <div 
               key={id}
               onClick={() => setActiveId(id)}
@@ -308,6 +308,7 @@ export default function AdminPage() {
                   onChange={handleImageUpload} 
                   className="w-full border p-2 rounded-lg mt-1 text-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" 
                 />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 {activeData.yayasan.imageUrl && (
                   <div className="mt-2 relative inline-block">
                     <img src={activeData.yayasan.imageUrl} alt="Preview" className="w-32 h-auto rounded-lg border shadow-sm" />

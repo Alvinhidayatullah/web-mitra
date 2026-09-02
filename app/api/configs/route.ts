@@ -1,19 +1,19 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { DashboardState } from "@/types/dashboard";
 
 export async function GET() {
   try {
     const configs = await prisma.dashboardConfig.findMany();
     return NextResponse.json(configs);
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: "Failed to fetch configs" }, { status: 500 });
   }
 }
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
-    // Assuming body is an array of configs or a single configs dictionary
+    const body = (await request.json()) as Record<string, DashboardState>;
     // To match the DashboardConfigs structure: { [id]: DashboardState }
     // We will clear existing and insert new ones, or just upsert.
     // Given the admin page sends the whole configs object:
@@ -21,7 +21,7 @@ export async function POST(request: Request) {
     // Clear all existing configs (this is a simple sync mechanism for MVP)
     await prisma.dashboardConfig.deleteMany();
 
-    const dataToInsert = Object.entries(body).map(([id, state]: [string, any]) => ({
+    const dataToInsert = Object.entries(body).map(([id, state]) => ({
       id: id,
       namaYayasan: state.yayasan.namaYayasan,
       isVerifiedYay: state.yayasan.isVerified,

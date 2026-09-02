@@ -2,8 +2,9 @@
 
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
+/* eslint-disable @next/next/no-img-element */
 import { useParams } from "next/navigation";
-import { CheckCircle2, Copy, ExternalLink, MapPin, Store, LocateFixed, X } from "lucide-react";
+import { CheckCircle2, Copy, ExternalLink, Store, X } from "lucide-react";
 import { DashboardState } from "@/types/dashboard";
 
 // Dynamic import for Leaflet map component to prevent SSR issues

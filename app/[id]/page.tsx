@@ -24,7 +24,7 @@ export default function DashboardView() {
   useEffect(() => {
     setMounted(true);
     // Load config from Database via API
-    fetch(`/api/configs/${id}`)
+    fetch(`/api/configs/${id}`, { cache: "no-store" })
       .then(res => {
         if (!res.ok) throw new Error("Not found");
         return res.json();

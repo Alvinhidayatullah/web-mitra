@@ -19,6 +19,7 @@ export default function DashboardView() {
   
   const [dashboardData, setDashboardData] = useState<DashboardState | null>(null);
   const [mounted, setMounted] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [isImagePopupOpen, setIsImagePopupOpen] = useState(false);
 
   useEffect(() => {
@@ -31,13 +32,26 @@ export default function DashboardView() {
       })
       .then(data => {
         setDashboardData(data);
+        setIsLoading(false);
       })
       .catch(e => {
         console.error("Failed to fetch dashboard data:", e);
+        setIsLoading(false);
       });
   }, [id]);
 
   if (!mounted) return null;
+
+  if (isLoading) {
+    return (
+      <main className="min-h-screen bg-[#f3f4f6] flex items-center justify-center p-4 text-center">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+          <p className="text-gray-500 font-semibold">Memuat Data...</p>
+        </div>
+      </main>
+    );
+  }
 
   if (!dashboardData) {
     return (

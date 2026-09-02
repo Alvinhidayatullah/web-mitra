@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model DashboardConfig {
+  id             String   @id @default(uuid())
+  namaYayasan    String
+  isVerifiedYay  Boolean
+  idMitra        String
+  npwp           String
+  nomorPonsel    String
+  email          String
+  imageUrl       String? // Base64 string
+
+  namaSPPG       String
+  isVerifiedSppg Boolean
+  idSPPG         String
+  yayasanTerkait String
+  statusBadge    String
+
+  lat            Float
+  lng            Float
+  zoomLevel      Int
+  mapLabel       String
+
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}

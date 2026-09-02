@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Search, Map } from "lucide-react";
+import { Search } from "lucide-react";
 
 export default function LandingPage() {
   const [uuid, setUuid] = useState("");
@@ -25,14 +25,8 @@ export default function LandingPage() {
       <div className="bg-white/80 backdrop-blur-xl p-8 sm:p-12 rounded-[2rem] shadow-2xl border border-white/50 max-w-xl w-full text-center relative z-10 transition-all duration-300 hover:shadow-blue-900/10 hover:bg-white/90">
         
         {/* Logos Section */}
-        <div className="flex items-center justify-center gap-6 sm:gap-10 mb-8">
-          <img src="/BGN.png" alt="BGN Logo" className="h-16 sm:h-20 object-contain drop-shadow-sm transition-transform hover:scale-105" />
-          <div className="w-px h-12 bg-gray-300 rounded-full"></div>
-          <img src="/Logo-mbg.png" alt="MBG Logo" className="h-16 sm:h-20 object-contain drop-shadow-sm transition-transform hover:scale-105" />
-        </div>
-
-        <div className="inline-flex items-center justify-center p-3 bg-blue-50 text-blue-600 rounded-2xl mb-6 shadow-inner border border-blue-100">
-          <Map className="w-8 h-8" />
+        <div className="flex items-center justify-center mb-8">
+          <img src="/BGN.png" alt="BGN Logo" className="h-24 sm:h-28 object-contain drop-shadow-md transition-transform hover:scale-105" />
         </div>
         
         <h1 className="text-3xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-900 to-blue-600 mb-3 tracking-tight">
@@ -40,7 +34,7 @@ export default function LandingPage() {
         </h1>
         
         <p className="text-gray-600 mb-10 text-sm sm:text-base leading-relaxed px-4">
-          Selamat datang di Sistem Informasi Geografis Mitra. Silakan masukkan kode unik (UUID) Anda untuk mengakses detail lokasi Yayasan dan Satuan Pendidikan Penyelenggara Gizi (SPPG).
+          Selamat datang di Sistem Informasi Geografis Mitra. Silakan masukkan kode unik (UUID) Anda untuk mengakses detail lokasi Yayasan dan SPPG
         </p>
         
         <form onSubmit={handleSearch} className="flex flex-col gap-4">

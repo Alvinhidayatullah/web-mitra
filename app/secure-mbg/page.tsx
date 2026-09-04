@@ -152,49 +152,7 @@ export default function AdminPage() {
     }));
   };
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      // Validasi ukuran awal (misal max 10MB)
-      if (file.size > 10 * 1024 * 1024) {
-        alert("File terlalu besar. Maksimal 10MB.");
-        return;
-      }
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const img = new window.Image();
-        img.src = reader.result as string;
-        img.onload = () => {
-          const canvas = document.createElement("canvas");
-          const MAX_WIDTH = 800;
-          const MAX_HEIGHT = 800;
-          let width = img.width;
-          let height = img.height;
 
-          if (width > height) {
-            if (width > MAX_WIDTH) {
-              height *= MAX_WIDTH / width;
-              width = MAX_WIDTH;
-            }
-          } else {
-            if (height > MAX_HEIGHT) {
-              width *= MAX_HEIGHT / height;
-              height = MAX_HEIGHT;
-            }
-          }
-          canvas.width = width;
-          canvas.height = height;
-          const ctx = canvas.getContext("2d");
-          ctx?.drawImage(img, 0, 0, width, height);
-          
-          // Kompres ke JPEG dengan kualitas 70% agar ukurannya sangat kecil (cepat disimpan & dimuat)
-          const compressedBase64 = canvas.toDataURL("image/jpeg", 0.7);
-          updateYayasan("imageUrl", compressedBase64);
-        };
-      };
-      reader.readAsDataURL(file);
-    }
-  };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const updateSPPG = (key: keyof DashboardState['sppg'], value: any) => {
@@ -330,22 +288,7 @@ export default function AdminPage() {
                   <input type="email" value={activeData.yayasan.email} onChange={e => updateYayasan("email", e.target.value)} className="w-full border p-2 rounded-lg mt-1" />
                 </div>
               </div>
-              <div>
-                <label className="block text-sm font-semibold">Upload Gambar (Popup Yayasan)</label>
-                <input 
-                  type="file" 
-                  accept="image/*"
-                  onChange={handleImageUpload} 
-                  className="w-full border p-2 rounded-lg mt-1 text-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" 
-                />
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                {activeData.yayasan.imageUrl && (
-                  <div className="mt-2 relative inline-block">
-                    <img src={activeData.yayasan.imageUrl} alt="Preview" className="w-32 h-auto rounded-lg border shadow-sm" />
-                    <button onClick={() => updateYayasan("imageUrl", "")} className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 shadow-md hover:bg-red-600"><X className="w-3 h-3" /></button>
-                  </div>
-                )}
-              </div>
+
               <div className="flex items-center gap-2 mt-2">
                 <input type="checkbox" checked={activeData.yayasan.isVerified} onChange={e => updateYayasan("isVerified", e.target.checked)} id="verif-yayasan" className="w-4 h-4" />
                 <label htmlFor="verif-yayasan" className="text-sm font-semibold cursor-pointer">Centang Verifikasi Biru (Yayasan)</label>

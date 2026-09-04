@@ -5,7 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import { DashboardState } from "@/types/dashboard";
 import { QRCodeCanvas } from "qrcode.react";
 import html2canvas from "html2canvas";
-import { ArrowLeft, Copy, ExternalLink } from "lucide-react";
+import { ArrowLeft, Copy } from "lucide-react";
 
 export default function QRCardPage() {
   const params = useParams();
@@ -163,15 +163,6 @@ export default function QRCardPage() {
             >
               <Copy className="w-5 h-5" />
             </button>
-            <a 
-              href={publicUrl} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="bg-gray-900 hover:bg-gray-800 text-white p-3 rounded-xl transition shadow-md"
-              title="Buka"
-            >
-              <ExternalLink className="w-5 h-5" />
-            </a>
           </div>
         </div>
       </div>

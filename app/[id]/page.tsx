@@ -163,6 +163,95 @@ export default function DashboardView() {
           </button>
         </div>
 
+      
+        {/* Detail Ekstra */}
+        {dashboardData.extendedData && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
+            
+            {/* SPPG Details */}
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-5">
+              <h3 className="text-sm font-bold text-gray-800 border-b pb-2 mb-3">Identitas SPPG Lanjutan</h3>
+              <div className="grid grid-cols-2 gap-2 text-xs md:text-sm">
+                <span className="text-gray-500">No. BA Verval</span><span className="font-medium text-gray-900">{dashboardData.extendedData.noBaVerval || "-"}</span>
+                <span className="text-gray-500">Tgl BA Verval</span><span className="font-medium text-gray-900">{dashboardData.extendedData.tglBaVerval || "-"}</span>
+                <span className="text-gray-500">Status Operasional</span><span className="font-medium text-gray-900">{dashboardData.extendedData.statusOperasional || "-"}</span>
+                <span className="text-gray-500">Tgl Operasional</span><span className="font-medium text-gray-900">{dashboardData.extendedData.tglOperasional || "-"}</span>
+                <span className="text-gray-500">Kode SPPG</span><span className="font-medium text-gray-900">{dashboardData.extendedData.kodeSppg || "-"}</span>
+                <span className="text-gray-500">Jenis Bangunan</span><span className="font-medium text-gray-900">{dashboardData.extendedData.jenisBangunanSppg || "-"}</span>
+                <span className="text-gray-500">Alamat Lengkap</span>
+                <span className="font-medium text-gray-900">
+                  {dashboardData.extendedData.alamatSppg}, {dashboardData.extendedData.kelurahanDesaSppg}, {dashboardData.extendedData.kecamatanSppg}, {dashboardData.extendedData.kabKotaSppg}, {dashboardData.extendedData.provinsiSppg} - {dashboardData.extendedData.kodePosSppg}
+                </span>
+              </div>
+            </div>
+
+            {/* Yayasan Details */}
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-5">
+              <h3 className="text-sm font-bold text-gray-800 border-b pb-2 mb-3">Identitas Yayasan Lanjutan</h3>
+              <div className="grid grid-cols-2 gap-2 text-xs md:text-sm">
+                <span className="text-gray-500">Alamat Lengkap</span>
+                <span className="font-medium text-gray-900">
+                  {dashboardData.extendedData.alamatYayasan}, {dashboardData.extendedData.kelurahanDesaYayasan}, {dashboardData.extendedData.kecamatanYayasan}, {dashboardData.extendedData.kabKotaYayasan}, {dashboardData.extendedData.provinsiYayasan} - {dashboardData.extendedData.kodePosYayasan}
+                </span>
+              </div>
+            </div>
+
+            {/* Bank Details */}
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-5">
+              <h3 className="text-sm font-bold text-gray-800 border-b pb-2 mb-3">Data Bank & Rekening Yayasan</h3>
+              <div className="grid grid-cols-2 gap-2 text-xs md:text-sm">
+                <span className="text-gray-500">Nama Bank</span><span className="font-medium text-gray-900">{dashboardData.extendedData.bank.namaBank || "-"}</span>
+                <span className="text-gray-500">No. Rekening</span><span className="font-medium text-gray-900">{dashboardData.extendedData.bank.noRekening || "-"}</span>
+                <span className="text-gray-500">Pemilik Rekening</span><span className="font-medium text-gray-900">{dashboardData.extendedData.bank.namaPemilikRekening || "-"}</span>
+                <span className="text-gray-500">Bank Virtual Acc</span><span className="font-medium text-gray-900">{dashboardData.extendedData.bank.namaBankVA || "-"}</span>
+                <span className="text-gray-500">No. Virtual Acc</span><span className="font-medium text-gray-900">{dashboardData.extendedData.bank.noVA || "-"}</span>
+                <span className="text-gray-500">Nama Virtual Acc</span><span className="font-medium text-gray-900">{dashboardData.extendedData.bank.namaVA || "-"}</span>
+              </div>
+            </div>
+
+            {/* PIC Details */}
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-5">
+              <h3 className="text-sm font-bold text-gray-800 border-b pb-2 mb-3">Data PIC Yayasan di SPPG</h3>
+              <div className="grid grid-cols-2 gap-2 text-xs md:text-sm">
+                <span className="text-gray-500">Nama Perwakilan</span><span className="font-medium text-gray-900">{dashboardData.extendedData.pic.namaPic || "-"}</span>
+                <span className="text-gray-500">NIK</span><span className="font-medium text-gray-900">{dashboardData.extendedData.pic.nikPic || "-"}</span>
+                <span className="text-gray-500">No. HP/Telp</span><span className="font-medium text-gray-900">{dashboardData.extendedData.pic.noHpPic || "-"}</span>
+                <span className="text-gray-500">Email</span><span className="font-medium text-gray-900">{dashboardData.extendedData.pic.emailPic || "-"}</span>
+              </div>
+            </div>
+
+            {/* Kasatpel Details */}
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-5">
+              <h3 className="text-sm font-bold text-gray-800 border-b pb-2 mb-3">Data SPPI / Kasatpel / Ka SPPG</h3>
+              <div className="grid grid-cols-2 gap-2 text-xs md:text-sm">
+                <span className="text-gray-500">Nama Lengkap</span><span className="font-medium text-gray-900">{dashboardData.extendedData.kasatpel.namaKasatpel || "-"}</span>
+                <span className="text-gray-500">NIK</span><span className="font-medium text-gray-900">{dashboardData.extendedData.kasatpel.nikKasatpel || "-"}</span>
+                <span className="text-gray-500">No. HP/Telp</span><span className="font-medium text-gray-900">{dashboardData.extendedData.kasatpel.noHpKasatpel || "-"}</span>
+                <span className="text-gray-500">Email</span><span className="font-medium text-gray-900">{dashboardData.extendedData.kasatpel.emailKasatpel || "-"}</span>
+                <span className="text-gray-500">No. SKEP</span><span className="font-medium text-gray-900">{dashboardData.extendedData.kasatpel.noSkepKasatpel || "-"}</span>
+                <span className="text-gray-500">Tgl SKEP</span><span className="font-medium text-gray-900">{dashboardData.extendedData.kasatpel.tglSkepKasatpel || "-"}</span>
+              </div>
+            </div>
+
+            {/* Mitra Details */}
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-5">
+              <h3 className="text-sm font-bold text-gray-800 border-b pb-2 mb-3">Identitas Mitra</h3>
+              <div className="grid grid-cols-2 gap-2 text-xs md:text-sm">
+                <span className="text-gray-500">Instansi</span><span className="font-medium text-gray-900">{dashboardData.extendedData.mitra.namaMitra || "-"} ({dashboardData.extendedData.mitra.jenisMitra})</span>
+                <span className="text-gray-500">Nama Pimpinan</span><span className="font-medium text-gray-900">{dashboardData.extendedData.mitra.namaPimpinanMitra || "-"}</span>
+                <span className="text-gray-500">Bentuk Dukungan</span><span className="font-medium text-gray-900">{dashboardData.extendedData.mitra.bentukDukunganMitra || "-"}</span>
+                <span className="text-gray-500">No. HP/Telp</span><span className="font-medium text-gray-900">{dashboardData.extendedData.mitra.noHpMitra || "-"}</span>
+                <span className="text-gray-500">Email</span><span className="font-medium text-gray-900">{dashboardData.extendedData.mitra.emailMitra || "-"}</span>
+                <span className="text-gray-500">Alamat Lengkap</span>
+                <span className="font-medium text-gray-900">
+                  {dashboardData.extendedData.mitra.alamatMitra}, {dashboardData.extendedData.mitra.kelurahanDesaMitra}, {dashboardData.extendedData.mitra.kecamatanMitra}, {dashboardData.extendedData.mitra.kabKotaMitra}, {dashboardData.extendedData.mitra.provinsiMitra} - {dashboardData.extendedData.mitra.kodePosMitra}
+                </span>
+              </div>
+            </div>
+
+          </div>
+        )}
+
       </div>
 
       {/* Image Popup Modal */}

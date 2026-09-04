@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { DashboardConfigs, DashboardState, defaultState } from "@/types/dashboard";
 import { useRouter } from "next/navigation";
-import { Plus, Trash2, X } from "lucide-react";
+import { Plus, Trash2 } from "lucide-react";
 
 const InteractiveMap = dynamic(() => import("@/components/InteractiveMap"), {
   ssr: false,
@@ -155,6 +155,50 @@ export default function AdminPage() {
 
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const updateExtendedFlat = (key: string, value: any) => {
+    if (!activeId) return;
+    setConfigs(prev => {
+      const ext = prev[activeId].extendedData || {
+        noBaVerval: "", tglBaVerval: "", statusOperasional: "Beroperasi", tglOperasional: "", kodeSppg: "", provinsiSppg: "", kabKotaSppg: "", kecamatanSppg: "", kelurahanDesaSppg: "", alamatSppg: "", kodePosSppg: "", jenisBangunanSppg: "", jenisSppg: "", provinsiYayasan: "", kabKotaYayasan: "", kecamatanYayasan: "", kelurahanDesaYayasan: "", alamatYayasan: "", kodePosYayasan: "", bank: { namaBank: "", noRekening: "", namaPemilikRekening: "", namaBankVA: "", noVA: "", namaVA: "" }, pic: { namaPic: "", nikPic: "", emailPic: "", noHpPic: "" }, kasatpel: { namaKasatpel: "", emailKasatpel: "", noHpKasatpel: "", nikKasatpel: "", noSkepKasatpel: "", tglSkepKasatpel: "" }, mitra: { jenisMitra: "", namaMitra: "", namaPimpinanMitra: "", noHpMitra: "", emailMitra: "", bentukDukunganMitra: "", provinsiMitra: "", kabKotaMitra: "", kecamatanMitra: "", kelurahanDesaMitra: "", alamatMitra: "", kodePosMitra: "" }
+      };
+      return {
+        ...prev,
+        [activeId]: {
+          ...prev[activeId],
+          extendedData: { ...ext, [key]: value }
+        }
+      };
+    });
+  };
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const updateExtendedNested = (section: 'bank'|'pic'|'kasatpel'|'mitra', key: string, value: any) => {
+    if (!activeId) return;
+    setConfigs(prev => {
+      const ext = prev[activeId].extendedData || {
+        noBaVerval: "", tglBaVerval: "", statusOperasional: "Beroperasi", tglOperasional: "", kodeSppg: "", provinsiSppg: "", kabKotaSppg: "", kecamatanSppg: "", kelurahanDesaSppg: "", alamatSppg: "", kodePosSppg: "", jenisBangunanSppg: "", jenisSppg: "", provinsiYayasan: "", kabKotaYayasan: "", kecamatanYayasan: "", kelurahanDesaYayasan: "", alamatYayasan: "", kodePosYayasan: "", bank: { namaBank: "", noRekening: "", namaPemilikRekening: "", namaBankVA: "", noVA: "", namaVA: "" }, pic: { namaPic: "", nikPic: "", emailPic: "", noHpPic: "" }, kasatpel: { namaKasatpel: "", emailKasatpel: "", noHpKasatpel: "", nikKasatpel: "", noSkepKasatpel: "", tglSkepKasatpel: "" }, mitra: { jenisMitra: "", namaMitra: "", namaPimpinanMitra: "", noHpMitra: "", emailMitra: "", bentukDukunganMitra: "", provinsiMitra: "", kabKotaMitra: "", kecamatanMitra: "", kelurahanDesaMitra: "", alamatMitra: "", kodePosMitra: "" }
+      };
+      return {
+        ...prev,
+        [activeId]: {
+          ...prev[activeId],
+          extendedData: {
+            ...ext,
+            [section]: {
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              ...(ext[section] as any),
+              [key]: value
+            }
+          }
+        }
+      };
+    });
+  };
+
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const updateSPPG = (key: keyof DashboardState['sppg'], value: any) => {
     if (!activeId) return;
     setConfigs(prev => ({
@@ -204,6 +248,7 @@ export default function AdminPage() {
   }
 
   const activeData = configs[activeId];
+  const ext = activeData?.extendedData || { noBaVerval: '', tglBaVerval: '', statusOperasional: 'Beroperasi', tglOperasional: '', kodeSppg: '', provinsiSppg: '', kabKotaSppg: '', kecamatanSppg: '', kelurahanDesaSppg: '', alamatSppg: '', kodePosSppg: '', jenisBangunanSppg: '', jenisSppg: '', provinsiYayasan: '', kabKotaYayasan: '', kecamatanYayasan: '', kelurahanDesaYayasan: '', alamatYayasan: '', kodePosYayasan: '', bank: {namaBank:'', noRekening:'', namaPemilikRekening:'', namaBankVA:'', noVA:'', namaVA:''}, pic: {namaPic:'', nikPic:'', emailPic:'', noHpPic:''}, kasatpel: {namaKasatpel:'', emailKasatpel:'', noHpKasatpel:'', nikKasatpel:'', noSkepKasatpel:'', tglSkepKasatpel:''}, mitra: {jenisMitra:'', namaMitra:'', namaPimpinanMitra:'', noHpMitra:'', emailMitra:'', bentukDukunganMitra:'', provinsiMitra:'', kabKotaMitra:'', kecamatanMitra:'', kelurahanDesaMitra:'', alamatMitra:'', kodePosMitra:''} };
   if (!activeData) return null;
 
 
@@ -293,6 +338,17 @@ export default function AdminPage() {
                 <input type="checkbox" checked={activeData.yayasan.isVerified} onChange={e => updateYayasan("isVerified", e.target.checked)} id="verif-yayasan" className="w-4 h-4" />
                 <label htmlFor="verif-yayasan" className="text-sm font-semibold cursor-pointer">Centang Verifikasi Biru (Yayasan)</label>
               </div>
+
+              <h3 className="font-semibold text-gray-700 mt-4 mb-2">Alamat Lengkap Yayasan</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div><label className="block text-sm font-semibold">Provinsi</label><input type="text" value={ext.provinsiYayasan} onChange={e => updateExtendedFlat("provinsiYayasan", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+                <div><label className="block text-sm font-semibold">Kab./Kota</label><input type="text" value={ext.kabKotaYayasan} onChange={e => updateExtendedFlat("kabKotaYayasan", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+                <div><label className="block text-sm font-semibold">Kecamatan</label><input type="text" value={ext.kecamatanYayasan} onChange={e => updateExtendedFlat("kecamatanYayasan", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+                <div><label className="block text-sm font-semibold">Kelurahan/Desa</label><input type="text" value={ext.kelurahanDesaYayasan} onChange={e => updateExtendedFlat("kelurahanDesaYayasan", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+              </div>
+              <div><label className="block text-sm font-semibold">Alamat</label><textarea value={ext.alamatYayasan} onChange={e => updateExtendedFlat("alamatYayasan", e.target.value)} className="w-full border p-2 rounded-lg mt-1"></textarea></div>
+              <div><label className="block text-sm font-semibold">Kode Pos</label><input type="text" value={ext.kodePosYayasan} onChange={e => updateExtendedFlat("kodePosYayasan", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+
             </div>
           </section>
 
@@ -322,9 +378,99 @@ export default function AdminPage() {
                 <input type="checkbox" checked={activeData.sppg.isVerified} onChange={e => updateSPPG("isVerified", e.target.checked)} id="verif-sppg" className="w-4 h-4" />
                 <label htmlFor="verif-sppg" className="text-sm font-semibold cursor-pointer">Centang Verifikasi Biru (SPPG)</label>
               </div>
+
+              <h3 className="font-semibold text-gray-700 mt-4 mb-2">Detail Operasional & Bangunan</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div><label className="block text-sm font-semibold">Nomor BA. Verval</label><input type="text" value={ext.noBaVerval} onChange={e => updateExtendedFlat("noBaVerval", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+                <div><label className="block text-sm font-semibold">Tanggal BA. Verval</label><input type="date" value={ext.tglBaVerval} onChange={e => updateExtendedFlat("tglBaVerval", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+                <div>
+                  <label className="block text-sm font-semibold">Status Operasional</label>
+                  <select value={ext.statusOperasional} onChange={e => updateExtendedFlat("statusOperasional", e.target.value)} className="w-full border p-2 rounded-lg mt-1">
+                    <option value="Beroperasi">Beroperasi</option>
+                    <option value="Tidak Beroperasi">Tidak Beroperasi</option>
+                  </select>
+                </div>
+                <div><label className="block text-sm font-semibold">Tanggal Operasional/Rencana</label><input type="date" value={ext.tglOperasional} onChange={e => updateExtendedFlat("tglOperasional", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+                <div><label className="block text-sm font-semibold">Kode SPPG</label><input type="text" value={ext.kodeSppg} onChange={e => updateExtendedFlat("kodeSppg", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+                <div><label className="block text-sm font-semibold">Jenis / Asal Bangunan SPPG</label><input type="text" value={ext.jenisBangunanSppg} onChange={e => updateExtendedFlat("jenisBangunanSppg", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+                <div><label className="block text-sm font-semibold">Jenis SPPG</label><input type="text" value={ext.jenisSppg} onChange={e => updateExtendedFlat("jenisSppg", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+              </div>
+              <h3 className="font-semibold text-gray-700 mt-4 mb-2">Alamat Lengkap SPPG</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div><label className="block text-sm font-semibold">Provinsi</label><input type="text" value={ext.provinsiSppg} onChange={e => updateExtendedFlat("provinsiSppg", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+                <div><label className="block text-sm font-semibold">Kab./Kota</label><input type="text" value={ext.kabKotaSppg} onChange={e => updateExtendedFlat("kabKotaSppg", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+                <div><label className="block text-sm font-semibold">Kecamatan</label><input type="text" value={ext.kecamatanSppg} onChange={e => updateExtendedFlat("kecamatanSppg", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+                <div><label className="block text-sm font-semibold">Kelurahan/Desa</label><input type="text" value={ext.kelurahanDesaSppg} onChange={e => updateExtendedFlat("kelurahanDesaSppg", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+              </div>
+              <div><label className="block text-sm font-semibold">Alamat</label><textarea value={ext.alamatSppg} onChange={e => updateExtendedFlat("alamatSppg", e.target.value)} className="w-full border p-2 rounded-lg mt-1"></textarea></div>
+              <div><label className="block text-sm font-semibold">Kode Pos</label><input type="text" value={ext.kodePosSppg} onChange={e => updateExtendedFlat("kodePosSppg", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+
             </div>
           </section>
+        
         </div>
+        
+        <div className="space-y-8">
+          {/* Bank */}
+          <section className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
+            <h2 className="text-lg font-bold mb-4 border-b pb-2">Data Bank/Rekening Yayasan</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div><label className="block text-sm font-semibold">Nama Bank</label><input type="text" value={ext.bank.namaBank} onChange={e => updateExtendedNested("bank", "namaBank", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+              <div><label className="block text-sm font-semibold">Nomor Rekening</label><input type="text" value={ext.bank.noRekening} onChange={e => updateExtendedNested("bank", "noRekening", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+              <div><label className="block text-sm font-semibold">Nama Pemilik Rekening</label><input type="text" value={ext.bank.namaPemilikRekening} onChange={e => updateExtendedNested("bank", "namaPemilikRekening", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+              <div><label className="block text-sm font-semibold">Nama Bank Virtual Account</label><input type="text" value={ext.bank.namaBankVA} onChange={e => updateExtendedNested("bank", "namaBankVA", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+              <div><label className="block text-sm font-semibold">Nomor Virtual Account</label><input type="text" value={ext.bank.noVA} onChange={e => updateExtendedNested("bank", "noVA", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+              <div><label className="block text-sm font-semibold">Nama Virtual Account</label><input type="text" value={ext.bank.namaVA} onChange={e => updateExtendedNested("bank", "namaVA", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+            </div>
+          </section>
+
+          {/* PIC */}
+          <section className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
+            <h2 className="text-lg font-bold mb-4 border-b pb-2">Data Perwakilan (PIC) Yayasan</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div><label className="block text-sm font-semibold">Nama Perwakilan</label><input type="text" value={ext.pic.namaPic} onChange={e => updateExtendedNested("pic", "namaPic", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+              <div><label className="block text-sm font-semibold">NIK</label><input type="text" value={ext.pic.nikPic} onChange={e => updateExtendedNested("pic", "nikPic", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+              <div><label className="block text-sm font-semibold">Email</label><input type="email" value={ext.pic.emailPic} onChange={e => updateExtendedNested("pic", "emailPic", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+              <div><label className="block text-sm font-semibold">No. HP/Telepon</label><input type="text" value={ext.pic.noHpPic} onChange={e => updateExtendedNested("pic", "noHpPic", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+            </div>
+          </section>
+
+          {/* Kasatpel */}
+          <section className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
+            <h2 className="text-lg font-bold mb-4 border-b pb-2">Data SPPI/Kasatpel/Ka SPPG</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div><label className="block text-sm font-semibold">Nama</label><input type="text" value={ext.kasatpel.namaKasatpel} onChange={e => updateExtendedNested("kasatpel", "namaKasatpel", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+              <div><label className="block text-sm font-semibold">Email</label><input type="email" value={ext.kasatpel.emailKasatpel} onChange={e => updateExtendedNested("kasatpel", "emailKasatpel", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+              <div><label className="block text-sm font-semibold">No. HP/Telepon</label><input type="text" value={ext.kasatpel.noHpKasatpel} onChange={e => updateExtendedNested("kasatpel", "noHpKasatpel", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+              <div><label className="block text-sm font-semibold">NIK</label><input type="text" value={ext.kasatpel.nikKasatpel} onChange={e => updateExtendedNested("kasatpel", "nikKasatpel", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+              <div><label className="block text-sm font-semibold">Nomor SKEP</label><input type="text" value={ext.kasatpel.noSkepKasatpel} onChange={e => updateExtendedNested("kasatpel", "noSkepKasatpel", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+              <div><label className="block text-sm font-semibold">Tanggal SKEP</label><input type="date" value={ext.kasatpel.tglSkepKasatpel} onChange={e => updateExtendedNested("kasatpel", "tglSkepKasatpel", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+            </div>
+          </section>
+
+          {/* Mitra */}
+          <section className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
+            <h2 className="text-lg font-bold mb-4 border-b pb-2">Identitas Mitra</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div><label className="block text-sm font-semibold">Jenis Mitra/Instansi</label><input type="text" value={ext.mitra.jenisMitra} onChange={e => updateExtendedNested("mitra", "jenisMitra", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+              <div><label className="block text-sm font-semibold">Nama Mitra/Instansi</label><input type="text" value={ext.mitra.namaMitra} onChange={e => updateExtendedNested("mitra", "namaMitra", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+              <div><label className="block text-sm font-semibold">Nama Pimpinan</label><input type="text" value={ext.mitra.namaPimpinanMitra} onChange={e => updateExtendedNested("mitra", "namaPimpinanMitra", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+              <div><label className="block text-sm font-semibold">No. HP/Telepon</label><input type="text" value={ext.mitra.noHpMitra} onChange={e => updateExtendedNested("mitra", "noHpMitra", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+              <div><label className="block text-sm font-semibold">Email</label><input type="email" value={ext.mitra.emailMitra} onChange={e => updateExtendedNested("mitra", "emailMitra", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+              <div><label className="block text-sm font-semibold">Bentuk Dukungan/Aset</label><input type="text" value={ext.mitra.bentukDukunganMitra} onChange={e => updateExtendedNested("mitra", "bentukDukunganMitra", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+            </div>
+            <h3 className="font-semibold text-gray-700 mt-4 mb-2">Alamat Lengkap Mitra</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div><label className="block text-sm font-semibold">Provinsi</label><input type="text" value={ext.mitra.provinsiMitra} onChange={e => updateExtendedNested("mitra", "provinsiMitra", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+              <div><label className="block text-sm font-semibold">Kab./Kota</label><input type="text" value={ext.mitra.kabKotaMitra} onChange={e => updateExtendedNested("mitra", "kabKotaMitra", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+              <div><label className="block text-sm font-semibold">Kecamatan</label><input type="text" value={ext.mitra.kecamatanMitra} onChange={e => updateExtendedNested("mitra", "kecamatanMitra", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+              <div><label className="block text-sm font-semibold">Kelurahan/Desa</label><input type="text" value={ext.mitra.kelurahanDesaMitra} onChange={e => updateExtendedNested("mitra", "kelurahanDesaMitra", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+            </div>
+            <div className="mt-4"><label className="block text-sm font-semibold">Alamat</label><textarea value={ext.mitra.alamatMitra} onChange={e => updateExtendedNested("mitra", "alamatMitra", e.target.value)} className="w-full border p-2 rounded-lg mt-1"></textarea></div>
+            <div className="mt-4"><label className="block text-sm font-semibold">Kode Pos</label><input type="text" value={ext.mitra.kodePosMitra} onChange={e => updateExtendedNested("mitra", "kodePosMitra", e.target.value)} className="w-full border p-2 rounded-lg mt-1" /></div>
+          </section>
+        </div>
+
 
         {/* Map Coordinates Form */}
         <section className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 h-fit">

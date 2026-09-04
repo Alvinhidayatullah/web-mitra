@@ -41,6 +41,8 @@ export async function POST(request: Request) {
       lng: state.sppg.location.longitude,
       zoomLevel: state.sppg.location.zoomLevel,
       mapLabel: state.sppg.location.label,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      extendedData: state.extendedData ? (state.extendedData as any) : undefined
     }));
 
     if (dataToInsert.length > 0) {

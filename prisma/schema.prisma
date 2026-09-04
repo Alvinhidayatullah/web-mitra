@@ -27,6 +27,7 @@ model DashboardConfig {
   lng            Float
   zoomLevel      Int
   mapLabel       String
+  extendedData   Json?
 
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt

@@ -24,9 +24,80 @@ export interface SPPGConfig {
   location: GeoCoordinate;
 }
 
+export interface BankConfig {
+  namaBank: string;
+  noRekening: string;
+  namaPemilikRekening: string;
+  namaBankVA: string;
+  noVA: string;
+  namaVA: string;
+}
+
+export interface PicConfig {
+  namaPic: string;
+  nikPic: string;
+  emailPic: string;
+  noHpPic: string;
+}
+
+export interface KasatpelConfig {
+  namaKasatpel: string;
+  emailKasatpel: string;
+  noHpKasatpel: string;
+  nikKasatpel: string;
+  noSkepKasatpel: string;
+  tglSkepKasatpel: string;
+}
+
+export interface MitraConfig {
+  jenisMitra: string;
+  namaMitra: string;
+  namaPimpinanMitra: string;
+  noHpMitra: string;
+  emailMitra: string;
+  bentukDukunganMitra: string;
+  provinsiMitra: string;
+  kabKotaMitra: string;
+  kecamatanMitra: string;
+  kelurahanDesaMitra: string;
+  alamatMitra: string;
+  kodePosMitra: string;
+}
+
+export interface ExtendedData {
+  // Extra SPPG fields
+  noBaVerval: string;
+  tglBaVerval: string;
+  statusOperasional: string;
+  tglOperasional: string;
+  kodeSppg: string;
+  provinsiSppg: string;
+  kabKotaSppg: string;
+  kecamatanSppg: string;
+  kelurahanDesaSppg: string;
+  alamatSppg: string;
+  kodePosSppg: string;
+  jenisBangunanSppg: string;
+  jenisSppg: string;
+
+  // Extra Yayasan fields
+  provinsiYayasan: string;
+  kabKotaYayasan: string;
+  kecamatanYayasan: string;
+  kelurahanDesaYayasan: string;
+  alamatYayasan: string;
+  kodePosYayasan: string;
+
+  bank: BankConfig;
+  pic: PicConfig;
+  kasatpel: KasatpelConfig;
+  mitra: MitraConfig;
+}
+
 export interface DashboardState {
   yayasan: YayasanConfig;
   sppg: SPPGConfig;
+  extendedData?: ExtendedData;
 }
 
 export const defaultState: DashboardState = {
@@ -51,6 +122,63 @@ export const defaultState: DashboardState = {
       label: "Titik Pengajuan Mitra",
     },
   },
+  extendedData: {
+    noBaVerval: "",
+    tglBaVerval: "",
+    statusOperasional: "Beroperasi",
+    tglOperasional: "",
+    kodeSppg: "",
+    provinsiSppg: "",
+    kabKotaSppg: "",
+    kecamatanSppg: "",
+    kelurahanDesaSppg: "",
+    alamatSppg: "",
+    kodePosSppg: "",
+    jenisBangunanSppg: "",
+    jenisSppg: "",
+    provinsiYayasan: "",
+    kabKotaYayasan: "",
+    kecamatanYayasan: "",
+    kelurahanDesaYayasan: "",
+    alamatYayasan: "",
+    kodePosYayasan: "",
+    bank: {
+      namaBank: "",
+      noRekening: "",
+      namaPemilikRekening: "",
+      namaBankVA: "",
+      noVA: "",
+      namaVA: "",
+    },
+    pic: {
+      namaPic: "",
+      nikPic: "",
+      emailPic: "",
+      noHpPic: "",
+    },
+    kasatpel: {
+      namaKasatpel: "",
+      emailKasatpel: "",
+      noHpKasatpel: "",
+      nikKasatpel: "",
+      noSkepKasatpel: "",
+      tglSkepKasatpel: "",
+    },
+    mitra: {
+      jenisMitra: "",
+      namaMitra: "",
+      namaPimpinanMitra: "",
+      noHpMitra: "",
+      emailMitra: "",
+      bentukDukunganMitra: "",
+      provinsiMitra: "",
+      kabKotaMitra: "",
+      kecamatanMitra: "",
+      kelurahanDesaMitra: "",
+      alamatMitra: "",
+      kodePosMitra: "",
+    },
+  }
 };
 
 export type DashboardConfigs = Record<string, DashboardState>;

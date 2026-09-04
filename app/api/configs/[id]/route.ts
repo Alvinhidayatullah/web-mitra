@@ -38,7 +38,9 @@ export async function GET(request: Request, { params }: { params: { id: string }
           zoomLevel: config.zoomLevel,
           label: config.mapLabel,
         }
-      }
+      },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      extendedData: config.extendedData ? (config.extendedData as any) : undefined
     };
 
     return NextResponse.json(dashboardState);

@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { DashboardConfigs, DashboardState, defaultState } from "@/types/dashboard";
-import { QRCodeCanvas } from "qrcode.react";
-import { Plus, Trash2, X, Copy, ExternalLink, Download } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Plus, Trash2, X } from "lucide-react";
 
 const InteractiveMap = dynamic(() => import("@/components/InteractiveMap"), {
   ssr: false,
@@ -25,8 +25,8 @@ export default function AdminPage() {
   
   const [configs, setConfigs] = useState<DashboardConfigs>({});
   const [activeId, setActiveId] = useState<string>("");
-  const [showQrModal, setShowQrModal] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const router = useRouter();
   
   useEffect(() => {
     setMounted(true);
@@ -105,7 +105,7 @@ export default function AdminPage() {
         body: JSON.stringify(configs)
       });
       if (res.ok) {
-        setShowQrModal(true);
+        router.push("/secure-mbg/qr/" + activeId);
       } else {
         alert("Gagal menyimpan ke database");
       }
@@ -209,20 +209,7 @@ export default function AdminPage() {
   const activeData = configs[activeId];
   if (!activeData) return null;
 
-  const publicUrl = typeof window !== "undefined" ? `${window.location.origin}/${activeId}` : "";
 
-  const downloadQR = () => {
-    const canvas = document.getElementById("qr-canvas") as HTMLCanvasElement;
-    if (canvas) {
-      const pngUrl = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-      const downloadLink = document.createElement("a");
-      downloadLink.href = pngUrl;
-      downloadLink.download = `QR_Code_${activeData.yayasan.namaYayasan || 'Config'}.png`;
-      document.body.appendChild(downloadLink);
-      downloadLink.click();
-      document.body.removeChild(downloadLink);
-    }
-  };
 
   return (
     <div className="min-h-screen bg-gray-50 text-black">
@@ -403,64 +390,6 @@ export default function AdminPage() {
         </section>
       </main>
 
-      {/* QR Code Modal */}
-      {showQrModal && (
-        <div className="fixed inset-0 z-[9999] bg-black/70 flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl relative flex flex-col items-center text-center">
-            <button 
-              onClick={() => setShowQrModal(false)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-black transition bg-gray-100 rounded-full p-2"
-            >
-              <X className="w-5 h-5" />
-            </button>
-
-            <h3 className="text-2xl font-extrabold text-gray-900 mb-2">Berhasil Disimpan!</h3>
-            <p className="text-gray-500 mb-6 text-sm">
-              Scan barcode di bawah ini untuk melihat hasil konfigurasi pada halaman publik.
-            </p>
-
-            <div className="bg-gray-50 p-4 rounded-2xl border border-gray-100 shadow-inner mb-6 inline-block flex flex-col items-center gap-4">
-              <QRCodeCanvas id="qr-canvas" value={publicUrl} size={200} level="H" />
-              <button 
-                onClick={downloadQR}
-                className="flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-xl transition shadow-sm text-sm w-full"
-              >
-                <Download className="w-4 h-4" />
-                Download QR Code
-              </button>
-            </div>
-
-            <div className="w-full">
-              <label className="block text-xs font-bold text-gray-500 mb-1 text-left uppercase tracking-wider">Tautan Unik Anda</label>
-              <div className="flex items-center gap-2">
-                <input 
-                  type="text" 
-                  readOnly 
-                  value={publicUrl} 
-                  className="w-full border border-gray-200 bg-gray-50 p-3 rounded-xl text-sm font-mono text-gray-600 outline-none" 
-                />
-                <button 
-                  onClick={() => { navigator.clipboard.writeText(publicUrl); alert("Disalin!") }}
-                  className="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-xl transition shadow-md"
-                  title="Copy URL"
-                >
-                  <Copy className="w-5 h-5" />
-                </button>
-                <a 
-                  href={publicUrl} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="bg-gray-900 hover:bg-gray-800 text-white p-3 rounded-xl transition shadow-md"
-                  title="Buka di tab baru"
-                >
-                  <ExternalLink className="w-5 h-5" />
-                </a>
-              </div>
-            </div>
-            
-          </div>
-        </div>
-      )}
     </div>
   );
 }

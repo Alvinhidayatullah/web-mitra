@@ -26,6 +26,7 @@ export default function LandingPage() {
         
         {/* Logos Section */}
         <div className="flex items-center justify-center mb-8">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/BGN.png" alt="BGN Logo" className="h-24 sm:h-28 object-contain drop-shadow-md transition-transform hover:scale-105" />
         </div>
         

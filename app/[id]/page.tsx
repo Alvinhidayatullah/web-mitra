@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 /* eslint-disable @next/next/no-img-element */
 import { useParams } from "next/navigation";
-import { CheckCircle2, Copy, ExternalLink, Store, X } from "lucide-react";
+import { CheckCircle2, Copy, Store } from "lucide-react";
 import { DashboardState } from "@/types/dashboard";
 
 // Dynamic import for Leaflet map component to prevent SSR issues
@@ -20,7 +20,6 @@ export default function DashboardView() {
   const [dashboardData, setDashboardData] = useState<DashboardState | null>(null);
   const [mounted, setMounted] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [isImagePopupOpen, setIsImagePopupOpen] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -155,14 +154,6 @@ export default function DashboardView() {
               </div>
             </div>
           </div>
-
-          <button 
-            onClick={() => setIsImagePopupOpen(true)}
-            className="text-gray-300 hover:text-white transition shrink-0 mt-2 md:mt-0 self-end md:self-auto flex items-center justify-center p-2 md:p-0" 
-            aria-label="Lihat Gambar"
-          >
-            <ExternalLink className="w-6 h-6" />
-          </button>
         </div>
 
       
@@ -255,34 +246,6 @@ export default function DashboardView() {
         )}
 
       </div>
-
-      {/* Image Popup Modal */}
-      {isImagePopupOpen && yayasan.imageUrl && (
-        <div className="fixed inset-0 z-[9999] bg-black/70 flex items-center justify-center p-4">
-          <div className="relative bg-white rounded-2xl overflow-hidden max-w-3xl w-full">
-            <button 
-              onClick={() => setIsImagePopupOpen(false)}
-              className="absolute top-4 right-4 bg-white/50 hover:bg-white p-2 rounded-full text-black transition z-10"
-            >
-              <X className="w-5 h-5" />
-            </button>
-            <img src={yayasan.imageUrl} alt="Popup Image" className="w-full h-auto max-h-[80vh] object-contain" />
-          </div>
-        </div>
-      )}
-      {isImagePopupOpen && !yayasan.imageUrl && (
-        <div className="fixed inset-0 z-[9999] bg-black/70 flex items-center justify-center p-4">
-          <div className="relative bg-white rounded-2xl p-8 max-w-sm w-full text-center">
-            <button 
-              onClick={() => setIsImagePopupOpen(false)}
-              className="absolute top-3 right-3 text-gray-500 hover:text-black transition"
-            >
-              <X className="w-5 h-5" />
-            </button>
-            <p className="text-gray-600 font-semibold">Belum ada gambar yang diupload untuk yayasan ini.</p>
-          </div>
-        </div>
-      )}
 
     </main>
   );

@@ -100,84 +100,68 @@ export default function DashboardView() {
           </div>
 
           {/* SPPG Info Area */}
-          <div className="p-5 flex flex-col sm:flex-row justify-between items-start gap-4">
-            <div className="flex flex-col gap-2 w-full sm:w-auto">
-              <h2 className="text-lg md:text-xl font-bold text-gray-900 uppercase leading-snug pr-4">
+          <div className="p-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div className="flex flex-col gap-1">
+              <h2 className="text-lg md:text-xl font-bold text-gray-900 uppercase">
                 {sppg.namaSPPG}
               </h2>
-              <div className="flex flex-col gap-1.5 text-sm text-gray-600 mt-1">
-                <div className="flex items-center gap-2">
-                  <span className="font-semibold w-24">ID SPPG</span>
-                  <span className="text-gray-400">:</span>
-                  <span className="flex items-center gap-1.5 font-mono text-gray-800">
-                    {sppg.idSPPG}
-                    <button className="text-gray-400 hover:text-indigo-600 transition" aria-label="Copy ID SPPG">
-                      <Copy className="w-3.5 h-3.5" />
-                    </button>
-                  </span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <span className="font-semibold w-24 shrink-0">Yayasan Terkait</span>
-                  <span className="text-gray-400 shrink-0">:</span>
-                  <span className="text-gray-800">{sppg.yayasanTerkait}</span>
-                </div>
+              <div className="flex items-center text-sm text-gray-500 flex-wrap gap-2">
+                <span>ID SPPG : {sppg.idSPPG}</span>
+                <button className="text-gray-400 hover:text-gray-600 transition" aria-label="Copy ID SPPG">
+                  <Copy className="w-4 h-4" />
+                </button>
+                <span className="text-gray-300 mx-1">•</span>
+                <span>Yayasan Terkait : {sppg.yayasanTerkait}</span>
               </div>
             </div>
             
-            <div className="bg-indigo-50 border border-indigo-200 text-indigo-700 px-4 py-1.5 rounded-full font-semibold text-sm whitespace-nowrap self-start">
+            <div className="bg-indigo-50 border border-indigo-200 text-indigo-700 px-4 py-1.5 rounded-full font-semibold text-sm whitespace-nowrap">
               {sppg.statusBadge}
             </div>
           </div>
         </div>
 
         {/* Yayasan Card */}
-        <div className="bg-[#0b1836] rounded-xl shadow-lg overflow-hidden p-5 flex flex-col sm:flex-row items-start justify-between gap-5 text-white">
-          <div className="flex flex-col justify-center w-full">
-            <div className="flex items-start gap-3 w-full">
-              <h1 className="text-lg md:text-xl font-bold tracking-wide leading-snug">
-                {yayasan.namaYayasan}
-              </h1>
-              {yayasan.isVerified && (
-                <CheckCircle2 className="w-5 h-5 text-white fill-blue-500 shrink-0 mt-0.5" />
-              )}
-            </div>
-            
-            <div className="flex flex-col gap-1.5 text-xs md:text-sm text-gray-300 mt-4">
-              <div className="flex items-center gap-2">
-                <span className="w-24 shrink-0 text-gray-400">ID Mitra</span>
-                <span className="shrink-0 text-gray-500">:</span>
-                <span className="flex items-center gap-1.5 font-mono text-white">
-                  {yayasan.idMitra}
+        <div className="bg-[#0b1836] rounded-xl shadow-md overflow-hidden p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-white">
+          <div className="flex items-start md:items-center gap-4 w-full md:w-auto">
+            {/* Yayasan Info */}
+            <div className="flex flex-col justify-center w-full">
+              <div className="mb-1">
+                <h1 className="text-lg md:text-xl font-bold tracking-wide inline">
+                  {yayasan.namaYayasan}
+                </h1>
+                {yayasan.isVerified && (
+                  <span className="inline-flex align-middle ml-2 pb-1">
+                    <CheckCircle2 className="w-5 h-5 text-white fill-blue-500" />
+                  </span>
+                )}
+              </div>
+              
+              <div className="flex flex-wrap items-center gap-2 text-xs md:text-sm text-gray-300">
+                <span className="flex items-center gap-1.5">
+                  ID Mitra : {yayasan.idMitra}
                   <button className="text-gray-400 hover:text-white transition" aria-label="Copy ID Mitra">
                     <Copy className="w-3.5 h-3.5" />
                   </button>
                 </span>
+                <span className="text-gray-500">•</span>
+                <span>NPWP: {yayasan.npwp}</span>
+                <span className="text-gray-500">•</span>
+                <span>Nomor Ponsel: {yayasan.nomorPonsel}</span>
               </div>
-              <div className="flex items-start gap-2">
-                <span className="w-24 shrink-0 text-gray-400">NPWP</span>
-                <span className="shrink-0 text-gray-500">:</span>
-                <span className="text-white">{yayasan.npwp}</span>
-              </div>
-              <div className="flex items-start gap-2">
-                <span className="w-24 shrink-0 text-gray-400">No. Ponsel</span>
-                <span className="shrink-0 text-gray-500">:</span>
-                <span className="text-white">{yayasan.nomorPonsel}</span>
-              </div>
-              <div className="flex items-start gap-2">
-                <span className="w-24 shrink-0 text-gray-400">Email</span>
-                <span className="shrink-0 text-gray-500">:</span>
-                <span className="text-white">{yayasan.email}</span>
+              
+              <div className="text-xs md:text-sm text-gray-300 mt-0.5">
+                Email: {yayasan.email}
               </div>
             </div>
           </div>
 
           <button 
             onClick={() => setIsImagePopupOpen(true)}
-            className="bg-white/10 hover:bg-white/20 transition rounded-lg shrink-0 self-start sm:self-center flex items-center justify-center p-3 text-white border border-white/20" 
+            className="text-gray-300 hover:text-white transition shrink-0 mt-2 md:mt-0 self-end md:self-auto flex items-center justify-center p-2 md:p-0" 
             aria-label="Lihat Gambar"
           >
-            <ExternalLink className="w-5 h-5" />
-            <span className="ml-2 text-sm font-semibold sm:hidden">Lihat Berkas</span>
+            <ExternalLink className="w-6 h-6" />
           </button>
         </div>
 

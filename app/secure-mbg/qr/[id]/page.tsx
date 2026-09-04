@@ -96,13 +96,10 @@ export default function QRCardPage() {
         {/* Content */}
         <div className="relative z-10 w-full flex flex-col items-center px-8">
           {/* Header */}
-          <div className="w-full flex justify-center mb-6 mt-2">
-            <div className="flex items-center gap-3">
+          <div className="w-full flex justify-start mb-6">
+            <div className="flex items-center">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/Logo-mbg.png" alt="MBG" className="h-12 object-contain" />
-              <div className="font-bold text-[#1e3a8a] text-[11px] leading-tight tracking-wide">
-                BADAN<br/>GIZI<br/>NASIONAL
-              </div>
+              <img src="/BGN.png" alt="BGN Logo" className="h-16 object-contain" />
             </div>
           </div>
 

@@ -26,6 +26,7 @@ export default function AdminPage() {
   const [configs, setConfigs] = useState<DashboardConfigs>({});
   const [activeId, setActiveId] = useState<string>("");
   const [mounted, setMounted] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   const router = useRouter();
   
   useEffect(() => {
@@ -99,6 +100,7 @@ export default function AdminPage() {
 
   const handleSave = async () => {
     try {
+      setIsSaving(true);
       const res = await fetch("/api/configs", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -107,10 +109,12 @@ export default function AdminPage() {
       if (res.ok) {
         router.push("/secure-mbg/qr/" + activeId);
       } else {
-        alert("Gagal menyimpan ke database");
+        alert("Gagal menyimpan ke database. Mungkin ukuran file terlalu besar.");
       }
     } catch (e) {
       alert("Error saat menyimpan: " + e);
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -151,8 +155,43 @@ export default function AdminPage() {
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      // Validasi ukuran awal (misal max 10MB)
+      if (file.size > 10 * 1024 * 1024) {
+        alert("File terlalu besar. Maksimal 10MB.");
+        return;
+      }
       const reader = new FileReader();
-      reader.onloadend = () => updateYayasan("imageUrl", reader.result as string);
+      reader.onloadend = () => {
+        const img = new window.Image();
+        img.src = reader.result as string;
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          const MAX_WIDTH = 800;
+          const MAX_HEIGHT = 800;
+          let width = img.width;
+          let height = img.height;
+
+          if (width > height) {
+            if (width > MAX_WIDTH) {
+              height *= MAX_WIDTH / width;
+              width = MAX_WIDTH;
+            }
+          } else {
+            if (height > MAX_HEIGHT) {
+              width *= MAX_HEIGHT / height;
+              height = MAX_HEIGHT;
+            }
+          }
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext("2d");
+          ctx?.drawImage(img, 0, 0, width, height);
+          
+          // Kompres ke JPEG dengan kualitas 70% agar ukurannya sangat kecil (cepat disimpan & dimuat)
+          const compressedBase64 = canvas.toDataURL("image/jpeg", 0.7);
+          updateYayasan("imageUrl", compressedBase64);
+        };
+      };
       reader.readAsDataURL(file);
     }
   };
@@ -217,8 +256,12 @@ export default function AdminPage() {
       <header className="bg-white shadow-sm p-4 flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-0 sticky top-0 z-50">
         <h1 className="text-lg sm:text-xl font-bold text-center sm:text-left">Admin - Manajemen Multi-Konfigurasi</h1>
         <div className="flex w-full sm:w-auto justify-center sm:justify-end gap-2 sm:gap-4">
-          <button onClick={handleSave} className="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition">
-            Simpan Konfigurasi
+          <button 
+            onClick={handleSave} 
+            disabled={isSaving}
+            className={`text-white px-4 py-2 rounded-lg font-semibold transition ${isSaving ? 'bg-blue-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'}`}
+          >
+            {isSaving ? "Menyimpan..." : "Simpan Konfigurasi"}
           </button>
           <button onClick={handleLogout} className="bg-red-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-red-600 transition">
             Logout

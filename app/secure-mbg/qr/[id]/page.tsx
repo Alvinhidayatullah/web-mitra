@@ -97,21 +97,25 @@ export default function QRCardPage() {
         ref={cardRef} 
         className="w-[400px] h-[550px] bg-white shadow-xl relative overflow-hidden flex flex-col items-center pt-8"
         style={{
-          backgroundImage: "linear-gradient(to bottom, #ffffff 65%, #f1f5f9 100%)"
+          backgroundImage: "linear-gradient(to bottom, #ffffff 65%, #f8fafc 100%)"
         }}
       >
-        {/* Background Waves (Top) */}
-        <div className="absolute top-0 right-0 w-40 h-40 bg-slate-50 rounded-full blur-xl opacity-80 z-0 translate-x-10 -translate-y-10"></div>
-        <div className="absolute top-20 right-10 w-32 h-32 bg-blue-50 rounded-full blur-2xl opacity-60 z-0"></div>
+        {/* Background Accents (Watermarks) */}
+        {/* Top Right Concentric Circles */}
+        <div className="absolute top-[-50px] right-[-60px] w-64 h-64 border-[35px] border-slate-100 rounded-full opacity-70 z-0"></div>
+        <div className="absolute top-[20px] right-[-10px] w-40 h-40 border-[20px] border-slate-100 rounded-full opacity-70 z-0"></div>
+        
+        {/* Bottom Left Faint Curves */}
+        <div className="absolute top-[250px] left-[-90px] w-[320px] h-[320px] border-[40px] border-slate-100 rounded-full opacity-60 z-0"></div>
 
         {/* Footer U-shape wave (z-10) */}
-        <div className="absolute bottom-0 left-0 w-full h-[260px] z-10 flex flex-col justify-end">
-          <svg className="absolute top-0 left-0 w-full h-full z-0" viewBox="0 0 400 260" preserveAspectRatio="none">
-            {/* The Q control point (200, 360) pulls the curve down in the middle, creating a beautiful U shape */}
-            <path d="M0,0 Q200,360 400,0 L400,260 L0,260 Z" fill="#1e3a8a" />
+        <div className="absolute bottom-0 left-0 w-full h-[220px] z-10">
+          <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+            {/* Left starts high (0,0), curves down to (45,75), goes up to right (100,30) */}
+            <path d="M0,0 Q45,75 100,30 L100,100 L0,100 Z" fill="#1e3a8a" />
           </svg>
           
-          <div className="relative z-10 flex items-center justify-center gap-3 w-full pb-6 text-[9px] text-white font-medium">
+          <div className="absolute bottom-6 left-0 w-full flex items-center justify-center gap-3 text-[9px] text-white/90 font-medium z-20">
             <div className="flex items-center gap-1.5">
               <InstagramIcon className="w-3.5 h-3.5 opacity-90" />
               <span>badangizinasional.ri</span>
@@ -148,7 +152,7 @@ export default function QRCardPage() {
           </h2>
 
           {/* White Box containing ID SPPG, QR, and Scan Text */}
-          <div className="bg-white p-5 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.12)] border border-gray-100 flex flex-col items-center w-full max-w-[285px] mt-1">
+          <div className="bg-white p-5 rounded-3xl shadow-[0_15px_40px_rgba(0,0,0,0.12)] border border-gray-100 flex flex-col items-center w-full max-w-[285px] mt-1 relative z-30">
             <div className="text-[13px] font-bold text-gray-800 mb-3 uppercase tracking-wider">
               ID SPPG : {data.sppg.idSPPG || "-"}
             </div>

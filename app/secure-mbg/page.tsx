@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { DashboardConfigs, DashboardState, defaultState, ExtendedData } from "@/types/dashboard";
 import { useRouter } from "next/navigation";
-import { Plus, Trash2 } from "lucide-react";
+import { Plus, Trash2, Copy } from "lucide-react";
 
 const InteractiveMap = dynamic(() => import("@/components/InteractiveMap"), {
   ssr: false,
@@ -122,6 +122,14 @@ export default function AdminPage() {
   const addConfig = () => {
     const newId = generateUUID();
     setConfigs(prev => ({ ...prev, [newId]: defaultState }));
+    setActiveId(newId);
+  };
+
+  const copyConfig = (id: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    const newId = generateUUID();
+    const copiedState = JSON.parse(JSON.stringify(configs[id])); // Deep copy to avoid reference issues
+    setConfigs(prev => ({ ...prev, [newId]: copiedState }));
     setActiveId(newId);
   };
 
@@ -295,13 +303,22 @@ export default function AdminPage() {
               }`}
             >
               <span className="font-semibold text-sm">Halaman {index + 1}</span>
-              <button 
-                onClick={(e) => deleteConfig(id, e)}
-                className="text-gray-400 hover:text-red-500 transition"
-                title="Hapus"
-              >
-                <Trash2 className="w-4 h-4" />
-              </button>
+              <div className="flex items-center gap-1">
+                <button 
+                  onClick={(e) => copyConfig(id, e)}
+                  className="text-gray-400 hover:text-blue-600 transition p-1"
+                  title="Duplikat"
+                >
+                  <Copy className="w-4 h-4" />
+                </button>
+                <button 
+                  onClick={(e) => deleteConfig(id, e)}
+                  className="text-gray-400 hover:text-red-500 transition p-1"
+                  title="Hapus"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              </div>
             </div>
           ))}
           <button 

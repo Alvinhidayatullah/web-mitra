@@ -95,54 +95,50 @@ export default function QRCardPage() {
 
       <div 
         ref={cardRef} 
-        className="w-[400px] bg-white shadow-xl relative overflow-hidden flex flex-col items-center pt-10 pb-12"
-        style={{ minHeight: '650px', backgroundColor: '#f8fafc' }}
+        className="w-[400px] shadow-2xl relative overflow-hidden flex flex-col items-center pt-10 pb-8"
+        style={{ minHeight: '650px', backgroundColor: '#0f172a' }} // Dark Blue/Navy background
       >
-        {/* Background Accents */}
-        <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-bl-full opacity-60 z-0"></div>
-        <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-50 rounded-tr-full opacity-60 z-0"></div>
-
         {/* Top Logo */}
-        <div className="relative z-10 w-full flex justify-center mb-8 px-10">
+        <div className="relative z-10 w-full flex justify-center mb-6 px-10">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/BGN.png" alt="BGN Logo" className="w-[85%] object-contain drop-shadow-sm" />
+          <img src="/BGN.png" alt="BGN Logo" className="w-[85%] object-contain" />
         </div>
 
-        {/* Kotak Barcode */}
-        <div className="relative z-10 w-[85%] bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-gray-100 p-8 flex flex-col items-center mb-8">
+        {/* Kotak Putih Utama */}
+        <div className="relative z-10 w-[88%] bg-white rounded-3xl shadow-lg border-b-4 border-[#3b82f6] p-8 flex flex-col items-center mb-auto">
           
           <h2 className="text-[#1e3a8a] text-2xl font-black italic tracking-wider mb-1">PINDAI DISINI</h2>
           <p className="text-[#1e3a8a] text-sm font-bold tracking-widest mb-6">UNTUK MELIHAT DETAIL</p>
           
-          <div className="bg-white p-2 rounded-2xl mb-6 shadow-inner border border-gray-100">
+          <div className="bg-white p-2 rounded-2xl mb-6 border-2 border-blue-100 shadow-sm">
             <QRCodeCanvas value={publicUrl} size={190} level="H" />
           </div>
           
           <div className="w-full flex flex-col gap-2 text-center">
             <div className="text-gray-800 font-bold text-sm uppercase">SATPEL : {data.sppg.namaSPPG}</div>
-            <div className="text-gray-600 font-semibold text-xs uppercase">Mitra : {data.yayasan.namaYayasan}</div>
+            <div className="text-gray-600 font-bold text-xs uppercase">Mitra : {data.yayasan.namaYayasan}</div>
             
-            <div className="mt-3 bg-blue-50 text-blue-800 py-2 px-5 rounded-full text-sm font-bold font-mono inline-block mx-auto border border-blue-200 shadow-sm">
+            <div className="mt-4 bg-blue-50 text-[#1e3a8a] py-2 px-6 rounded-full text-sm font-bold font-mono inline-block mx-auto border border-blue-200">
               ID SPPG : {data.sppg.idSPPG || "-"}
             </div>
           </div>
         </div>
 
-        {/* Footer Socials */}
-        <div className="relative z-10 w-full px-12 flex flex-col gap-4 mt-2">
-          <div className="flex items-center gap-4 text-[#1e3a8a]">
-            <InstagramIcon className="w-6 h-6" />
-            <span className="font-bold text-base">@badangizinasional</span>
+        {/* Footer Socials - Horizontal */}
+        <div className="relative z-10 w-full px-6 flex items-center justify-center gap-4 mt-8">
+          <div className="flex items-center gap-1.5 text-white">
+            <InstagramIcon className="w-4 h-4" />
+            <span className="font-semibold text-[10px] tracking-wide">@badangizinasional</span>
           </div>
           
-          <div className="flex items-center gap-4 text-[#1e3a8a]">
-            <FacebookIcon className="w-6 h-6 fill-current" />
-            <span className="font-bold text-base">@badangizinasional</span>
+          <div className="flex items-center gap-1.5 text-white">
+            <FacebookIcon className="w-4 h-4 fill-current" />
+            <span className="font-semibold text-[10px] tracking-wide">@badangizinasional</span>
           </div>
           
-          <div className="flex items-center gap-4 text-[#1e3a8a]">
-            <Mail className="w-6 h-6" />
-            <span className="font-bold text-base">halo@bgn.go.id</span>
+          <div className="flex items-center gap-1.5 text-white">
+            <Mail className="w-4 h-4" />
+            <span className="font-semibold text-[10px] tracking-wide">www.gizinasional.go.id</span>
           </div>
         </div>
       </div>

@@ -249,8 +249,18 @@ export default function AdminPage() {
   }
 
   const activeData = configs[activeId];
-  const ext = activeData?.extendedData || { noBaVerval: '', tglBaVerval: '', statusOperasional: 'Beroperasi', tglOperasional: '', kodeSppg: '', provinsiSppg: '', kabKotaSppg: '', kecamatanSppg: '', kelurahanDesaSppg: '', alamatSppg: '', kodePosSppg: '', jenisBangunanSppg: '', jenisSppg: '', provinsiYayasan: '', kabKotaYayasan: '', kecamatanYayasan: '', kelurahanDesaYayasan: '', alamatYayasan: '', kodePosYayasan: '', bank: {namaBank:'', noRekening:'', namaPemilikRekening:'', namaBankVA:'', noVA:'', namaVA:''}, pic: {namaPic:'', nikPic:'', emailPic:'', noHpPic:''}, kasatpel: {namaKasatpel:'', emailKasatpel:'', noHpKasatpel:'', nikKasatpel:'', noSkepKasatpel:'', tglSkepKasatpel:''}, mitra: {jenisMitra:'', namaMitra:'', namaPimpinanMitra:'', noHpMitra:'', emailMitra:'', bentukDukunganMitra:'', provinsiMitra:'', kabKotaMitra:'', kecamatanMitra:'', kelurahanDesaMitra:'', alamatMitra:'', kodePosMitra:''} };
   if (!activeData) return null;
+
+  const defaultExt = { noBaVerval: '', tglBaVerval: '', statusOperasional: 'Beroperasi', tglOperasional: '', kodeSppg: '', provinsiSppg: '', kabKotaSppg: '', kecamatanSppg: '', kelurahanDesaSppg: '', alamatSppg: '', kodePosSppg: '', jenisBangunanSppg: '', jenisSppg: '', provinsiYayasan: '', kabKotaYayasan: '', kecamatanYayasan: '', kelurahanDesaYayasan: '', alamatYayasan: '', kodePosYayasan: '', bank: {namaBank:'', noRekening:'', namaPemilikRekening:'', namaBankVA:'', noVA:'', namaVA:''}, pic: {namaPic:'', nikPic:'', emailPic:'', noHpPic:''}, kasatpel: {namaKasatpel:'', emailKasatpel:'', noHpKasatpel:'', nikKasatpel:'', noSkepKasatpel:'', tglSkepKasatpel:''}, mitra: {jenisMitra:'', namaMitra:'', namaPimpinanMitra:'', noHpMitra:'', emailMitra:'', bentukDukunganMitra:'', provinsiMitra:'', kabKotaMitra:'', kecamatanMitra:'', kelurahanDesaMitra:'', alamatMitra:'', kodePosMitra:''} };
+  const rawExt = activeData.extendedData || ({} as Partial<ExtendedData>);
+  const ext = {
+    ...defaultExt,
+    ...rawExt,
+    bank: { ...defaultExt.bank, ...(rawExt.bank || {}) },
+    pic: { ...defaultExt.pic, ...(rawExt.pic || {}) },
+    kasatpel: { ...defaultExt.kasatpel, ...(rawExt.kasatpel || {}) },
+    mitra: { ...defaultExt.mitra, ...(rawExt.mitra || {}) },
+  };
 
 
 

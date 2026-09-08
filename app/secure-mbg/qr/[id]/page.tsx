@@ -115,19 +115,19 @@ export default function QRCardPage() {
             <path d="M0,0 Q45,75 100,30 L100,100 L0,100 Z" fill="#1e3a8a" />
           </svg>
           
-          <div className="absolute bottom-6 left-0 w-full flex items-center justify-center gap-3 text-[9px] text-white/90 font-medium z-20">
-            <div className="flex items-center gap-1.5">
-              <InstagramIcon className="w-3.5 h-3.5 opacity-90" />
+          <div className="absolute bottom-6 left-0 w-full flex items-center justify-center text-[9px] text-white/90 font-medium z-20">
+            <div className="flex items-center mr-3">
+              <InstagramIcon className="w-3.5 h-3.5 opacity-90 mr-1.5" />
               <span>badangizinasional.ri</span>
             </div>
-            <span className="opacity-60 text-[8px]">•</span>
-            <div className="flex items-center gap-1.5">
-              <FacebookIcon className="w-3.5 h-3.5 fill-current opacity-90" />
+            <span className="opacity-60 text-[8px] mr-3">•</span>
+            <div className="flex items-center mr-3">
+              <FacebookIcon className="w-3.5 h-3.5 fill-current opacity-90 mr-1.5" />
               <span>Bgn RI</span>
             </div>
-            <span className="opacity-60 text-[8px]">•</span>
-            <div className="flex items-center gap-1.5">
-              <Mail className="w-3.5 h-3.5 opacity-90" />
+            <span className="opacity-60 text-[8px] mr-3">•</span>
+            <div className="flex items-center">
+              <Mail className="w-3.5 h-3.5 opacity-90 mr-1.5" />
               <span>halo@bgn.go.id</span>
             </div>
           </div>

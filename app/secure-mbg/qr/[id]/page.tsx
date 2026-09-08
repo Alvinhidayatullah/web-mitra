@@ -95,52 +95,67 @@ export default function QRCardPage() {
 
       <div 
         ref={cardRef} 
-        className="w-[450px] aspect-[1/1.414] bg-white shadow-2xl relative flex flex-col items-center pt-10 pb-6 px-6"
-        style={{ minHeight: '636px' }} 
+        className="w-[400px] h-[550px] bg-white shadow-xl relative overflow-hidden flex flex-col items-center pt-8"
+        style={{
+          backgroundImage: "linear-gradient(to bottom, #ffffff 65%, #f1f5f9 100%)"
+        }}
       >
-        {/* Top Logo */}
-        <div className="w-full flex justify-center mb-8">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/BGN.png" alt="BGN Logo" className="w-[65%] object-contain" />
-        </div>
+        {/* Background Waves (Top) */}
+        <div className="absolute top-0 right-0 w-40 h-40 bg-slate-50 rounded-full blur-xl opacity-80 z-0 translate-x-10 -translate-y-10"></div>
+        <div className="absolute top-20 right-10 w-32 h-32 bg-blue-50 rounded-full blur-2xl opacity-60 z-0"></div>
 
-        {/* Kotak Biru Utama */}
-        <div className="w-full bg-[#1e3a8a] rounded-3xl p-8 flex flex-col items-center shadow-lg">
-          
-          <h2 className="text-[#fbbf24] text-[28px] font-black italic tracking-widest mb-1">PINDAI DISINI</h2>
-          <p className="text-white text-[13px] font-bold tracking-widest mb-8">UNTUK MELIHAT DETAIL</p>
-          
-          {/* QR Code Container (Clean White Box) */}
-          <div className="bg-white p-4 rounded-xl mb-8">
+        {/* Content */}
+        <div className="relative z-10 w-full flex flex-col items-center px-8 h-full">
+          {/* Header Logo (Top Left) */}
+          <div className="w-full flex justify-start mb-6">
+            <div className="flex items-center">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/BGN.png" alt="BGN Logo" className="h-10 object-contain" />
+            </div>
+          </div>
+
+          {/* SPPG & Yayasan Name */}
+          <h1 className="text-[15px] font-black text-center text-gray-900 leading-snug mb-1 uppercase w-full tracking-tight">
+            {data.sppg.namaSPPG}
+          </h1>
+          <h2 className="text-[12px] font-bold text-center text-gray-800 mb-6 uppercase w-full">
+            {data.yayasan.namaYayasan}
+          </h2>
+
+          {/* White Box containing ID SPPG, QR, and Scan Text */}
+          <div className="bg-white p-5 rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.08)] border border-gray-100 flex flex-col items-center w-full max-w-[280px] z-20">
+            <div className="text-[11px] font-bold text-gray-700 mb-3 uppercase tracking-wider">
+              ID SPPG : {data.sppg.idSPPG || "-"}
+            </div>
+            
             <QRCodeCanvas value={publicUrl} size={180} level="H" />
-          </div>
-          
-          {/* Info Text (All plain text, centered) */}
-          <div className="w-full flex flex-col gap-1.5 text-center text-white">
-            <div className="font-bold text-[13px] uppercase tracking-wide">SATPEL : {data.sppg.namaSPPG}</div>
-            <div className="font-bold text-[13px] uppercase tracking-wide">MITRA : {data.yayasan.namaYayasan}</div>
-            <div className="font-bold text-[13px] uppercase tracking-wide mt-1">ID SPPG : {data.sppg.idSPPG || "-"}</div>
+            
+            <div className="text-[9px] text-gray-500 font-medium mt-3">
+              Pindai QR Code untuk informasi dapur ini
+            </div>
           </div>
         </div>
 
-        {/* Spacer to push socials to bottom */}
-        <div className="flex-grow"></div>
-
-        {/* Footer Socials */}
-        <div className="w-full flex items-center justify-center gap-5 mt-6">
-          <div className="flex items-center gap-1.5 text-[#1e3a8a]">
-            <InstagramIcon className="w-[18px] h-[18px]" />
-            <span className="font-bold text-[11px] tracking-tight">@badangizinasional</span>
-          </div>
-          
-          <div className="flex items-center gap-1.5 text-[#1e3a8a]">
-            <FacebookIcon className="w-[18px] h-[18px] fill-current" />
-            <span className="font-bold text-[11px] tracking-tight">@badangizinasional</span>
-          </div>
-          
-          <div className="flex items-center gap-1.5 text-[#1e3a8a]">
-            <Mail className="w-[18px] h-[18px]" />
-            <span className="font-bold text-[11px] tracking-tight">www.gizinasional.go.id</span>
+        {/* Footer wave curve effect using scale */}
+        <div 
+          className="absolute bottom-0 left-0 w-full h-[180px] bg-[#1e3a8a] rounded-t-[100%] flex flex-col items-center justify-end pb-8 text-[9px] text-white/90 font-medium z-10" 
+          style={{ transform: "scaleX(1.5)", transformOrigin: "bottom center" }}
+        >
+          <div style={{ transform: "scaleX(0.666)" }} className="flex items-center justify-center gap-3 w-full">
+            <div className="flex items-center gap-1">
+              <InstagramIcon className="w-3.5 h-3.5 opacity-80" />
+              <span>badangizinasional.ri</span>
+            </div>
+            <span className="opacity-50">•</span>
+            <div className="flex items-center gap-1">
+              <FacebookIcon className="w-3.5 h-3.5 fill-current opacity-80" />
+              <span>Bgn RI</span>
+            </div>
+            <span className="opacity-50">•</span>
+            <div className="flex items-center gap-1">
+              <Mail className="w-3.5 h-3.5 opacity-80" />
+              <span>halo@bgn.go.id</span>
+            </div>
           </div>
         </div>
       </div>

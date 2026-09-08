@@ -107,28 +107,28 @@ export default function QRCardPage() {
             className="absolute bottom-6 left-0 w-full z-20 text-[9.5px] text-white font-medium text-center"
           >
             <div style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: '14px' }}>
-              <div style={{ display: 'inline-block', verticalAlign: 'middle', width: '14px', height: '14px', marginRight: '6px' }}>
-                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiB4PSIyIiB5PSIyIiByeD0iNSIgcnk9IjUiLz48cGF0aCBkPSJNMTYgMTEuMzdBNCA0IDAgMSAxIDEyLjYzIDggNCA0IDAgMCAxIDE2IDExLjM3eiIvPjxsaW5lIHgxPSIxNy41IiB4Mj0iMTcuNTEiIHkxPSI2LjUiIHkyPSI2LjUiLz48L3N2Zz4=" width="14" height="14" style={{ display: 'block', width: '14px', height: '14px', opacity: 0.9 }} alt="IG" />
+              <div style={{ display: 'inline-block', verticalAlign: 'middle', width: '10px', height: '10px', marginRight: '6px' }}>
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiB4PSIyIiB5PSIyIiByeD0iNSIgcnk9IjUiLz48cGF0aCBkPSJNMTYgMTEuMzdBNCA0IDAgMSAxIDEyLjYzIDggNCA0IDAgMCAxIDE2IDExLjM3eiIvPjxsaW5lIHgxPSIxNy41IiB4Mj0iMTcuNTEiIHkxPSI2LjUiIHkyPSI2LjUiLz48L3N2Zz4=" width="10" height="10" style={{ display: 'block', width: '10px', height: '10px', opacity: 0.9 }} alt="IG" />
               </div>
-              <span style={{ display: 'inline-block', verticalAlign: 'middle', lineHeight: '14px' }}>badangizinasional.ri</span>
+              <span style={{ display: 'inline-block', verticalAlign: 'middle', lineHeight: '10px' }}>badangizinasional.ri</span>
             </div>
             
-            <span className="opacity-60 text-[8px]" style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: '14px', lineHeight: '14px' }}>•</span>
+            <span className="opacity-60 text-[8px]" style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: '14px', lineHeight: '10px' }}>•</span>
             
             <div style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: '14px' }}>
-              <div style={{ display: 'inline-block', verticalAlign: 'middle', width: '14px', height: '14px', marginRight: '6px' }}>
-                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjAiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTE4IDJoLTNhNSA1IDAgMCAwLTUgNXYzSDd2NGgzdjhoNHYtOGgzbDEtNGgtNFY3YTEgMSAwIDAgMSAxLTFoM3oiLz48L3N2Zz4=" width="14" height="14" style={{ display: 'block', width: '14px', height: '14px', opacity: 0.9 }} alt="FB" />
+              <div style={{ display: 'inline-block', verticalAlign: 'middle', width: '10px', height: '10px', marginRight: '6px' }}>
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjAiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTE4IDJoLTNhNSA1IDAgMCAwLTUgNXYzSDd2NGgzdjhoNHYtOGgzbDEtNGgtNFY3YTEgMSAwIDAgMSAxLTFoM3oiLz48L3N2Zz4=" width="10" height="10" style={{ display: 'block', width: '10px', height: '10px', opacity: 0.9 }} alt="FB" />
               </div>
-              <span style={{ display: 'inline-block', verticalAlign: 'middle', lineHeight: '14px' }}>Bgn RI</span>
+              <span style={{ display: 'inline-block', verticalAlign: 'middle', lineHeight: '10px' }}>Bgn RI</span>
             </div>
             
-            <span className="opacity-60 text-[8px]" style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: '14px', lineHeight: '14px' }}>•</span>
+            <span className="opacity-60 text-[8px]" style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: '14px', lineHeight: '10px' }}>•</span>
             
             <div style={{ display: 'inline-block', verticalAlign: 'middle' }}>
-              <div style={{ display: 'inline-block', verticalAlign: 'middle', width: '14px', height: '14px', marginRight: '6px' }}>
-                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjE2IiB4PSIyIiB5PSI0IiByeD0iMiIvPjxwYXRoIGQ9Im0yMiA3LTguOTcgNS43YTEuOTQgMS45NCAwIDAgMS0yLjA2IDBMMiA3Ii8+PC9zdmc+" width="14" height="14" style={{ display: 'block', width: '14px', height: '14px', opacity: 0.9 }} alt="Mail" />
+              <div style={{ display: 'inline-block', verticalAlign: 'middle', width: '10px', height: '10px', marginRight: '6px' }}>
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjE2IiB4PSIyIiB5PSI0IiByeD0iMiIvPjxwYXRoIGQ9Im0yMiA3LTguOTcgNS43YTEuOTQgMS45NCAwIDAgMS0yLjA2IDBMMiA3Ii8+PC9zdmc+" width="10" height="10" style={{ display: 'block', width: '10px', height: '10px', opacity: 0.9 }} alt="Mail" />
               </div>
-              <span style={{ display: 'inline-block', verticalAlign: 'middle', lineHeight: '14px' }}>halo@bgn.go.id</span>
+              <span style={{ display: 'inline-block', verticalAlign: 'middle', lineHeight: '10px' }}>halo@bgn.go.id</span>
             </div>
           </div>
         </div>

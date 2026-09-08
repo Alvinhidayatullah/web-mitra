@@ -5,7 +5,21 @@ import { useParams, useRouter } from "next/navigation";
 import { DashboardState } from "@/types/dashboard";
 import { QRCodeCanvas } from "qrcode.react";
 import html2canvas from "html2canvas";
-import { ArrowLeft, Copy } from "lucide-react";
+import { ArrowLeft, Copy, Mail } from "lucide-react";
+
+const InstagramIcon = ({ className }: { className?: string }) => (
+  <svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+  </svg>
+);
+
+const FacebookIcon = ({ className }: { className?: string }) => (
+  <svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none" strokeWidth="0" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+  </svg>
+);
 
 export default function QRCardPage() {
   const params = useParams();
@@ -79,61 +93,56 @@ export default function QRCardPage() {
         </button>
       </div>
 
-      {/* Identitas Card */}
-      <h2 className="w-full max-w-[400px] text-left text-lg font-bold text-gray-800 mb-4">QR Code Identitas</h2>
-      
       <div 
         ref={cardRef} 
-        className="w-[400px] h-[550px] bg-white shadow-xl relative overflow-hidden flex flex-col items-center pt-8"
-        style={{
-          backgroundImage: "linear-gradient(to bottom, #ffffff 65%, #1e3a8a 65%)"
-        }}
+        className="w-[400px] bg-white shadow-xl relative overflow-hidden flex flex-col items-center pt-10 pb-12"
+        style={{ minHeight: '650px', backgroundColor: '#f8fafc' }}
       >
-        {/* Background Waves (Top) */}
-        <div className="absolute top-0 right-0 w-40 h-40 bg-slate-50 rounded-full blur-xl opacity-80 z-0 translate-x-10 -translate-y-10"></div>
-        <div className="absolute top-20 right-10 w-32 h-32 bg-blue-50 rounded-full blur-2xl opacity-60 z-0"></div>
+        {/* Background Accents */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-bl-full opacity-60 z-0"></div>
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-50 rounded-tr-full opacity-60 z-0"></div>
 
-        {/* Content */}
-        <div className="relative z-10 w-full flex flex-col items-center px-8">
-          {/* Header */}
-          <div className="w-full flex justify-start mb-6">
-            <div className="flex items-center">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/BGN.png" alt="BGN Logo" className="h-16 object-contain" />
-            </div>
-          </div>
-
-          {/* SPPG & Yayasan Name */}
-          <h1 className="text-[14px] font-extrabold text-center text-gray-800 leading-snug mb-1 uppercase w-full">
-            {data.sppg.namaSPPG}
-          </h1>
-          <h2 className="text-[12px] font-bold text-center text-gray-500 mb-4 uppercase w-full">
-            {data.yayasan.namaYayasan}
-          </h2>
-          
-          <div className="text-[10px] text-gray-400 font-mono tracking-widest mb-3">
-            ID SPPG: {data.sppg.idSPPG || "-"}
-          </div>
-
-          {/* QR Code */}
-          <div className="bg-white p-4 rounded-3xl shadow-lg border border-gray-100 mb-4">
-            <QRCodeCanvas value={publicUrl} size={180} level="H" />
-          </div>
-          
-          <p className="text-[10px] text-gray-400 font-medium mb-12">
-            Pindai QR Code untuk informasi dapur ini
-          </p>
+        {/* Top Logo */}
+        <div className="relative z-10 w-full flex justify-center mb-8 px-10">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/BGN.png" alt="BGN Logo" className="w-[85%] object-contain drop-shadow-sm" />
         </div>
 
-        {/* Footer wave curve effect using scale */}
-        <div 
-          className="absolute bottom-0 left-0 w-full h-[220px] bg-[#1e3a8a] rounded-t-[100%] flex flex-col items-center justify-end pb-8 text-[10px] text-white/90 font-medium z-0" 
-          style={{ transform: "scaleX(1.5)", transformOrigin: "bottom center" }}
-        >
-          <div style={{ transform: "scaleX(0.666)" }} className="flex items-center gap-5">
-            <span className="flex items-center gap-1.5"><span className="opacity-70">🌐</span> badangizinasional.ri</span>
-            <span className="flex items-center gap-1.5"><span className="opacity-70">📱</span> @bgn.ri</span>
-            <span className="flex items-center gap-1.5"><span className="opacity-70">✉️</span> halo@bgn.go.id</span>
+        {/* Kotak Barcode */}
+        <div className="relative z-10 w-[85%] bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-gray-100 p-8 flex flex-col items-center mb-8">
+          
+          <h2 className="text-[#1e3a8a] text-2xl font-black italic tracking-wider mb-1">PINDAI DISINI</h2>
+          <p className="text-[#1e3a8a] text-sm font-bold tracking-widest mb-6">UNTUK MELIHAT DETAIL</p>
+          
+          <div className="bg-white p-2 rounded-2xl mb-6 shadow-inner border border-gray-100">
+            <QRCodeCanvas value={publicUrl} size={190} level="H" />
+          </div>
+          
+          <div className="w-full flex flex-col gap-2 text-center">
+            <div className="text-gray-800 font-bold text-sm uppercase">SATPEL : {data.sppg.namaSPPG}</div>
+            <div className="text-gray-600 font-semibold text-xs uppercase">Mitra : {data.yayasan.namaYayasan}</div>
+            
+            <div className="mt-3 bg-blue-50 text-blue-800 py-2 px-5 rounded-full text-sm font-bold font-mono inline-block mx-auto border border-blue-200 shadow-sm">
+              ID SPPG : {data.sppg.idSPPG || "-"}
+            </div>
+          </div>
+        </div>
+
+        {/* Footer Socials */}
+        <div className="relative z-10 w-full px-12 flex flex-col gap-4 mt-2">
+          <div className="flex items-center gap-4 text-[#1e3a8a]">
+            <InstagramIcon className="w-6 h-6" />
+            <span className="font-bold text-base">@badangizinasional</span>
+          </div>
+          
+          <div className="flex items-center gap-4 text-[#1e3a8a]">
+            <FacebookIcon className="w-6 h-6 fill-current" />
+            <span className="font-bold text-base">@badangizinasional</span>
+          </div>
+          
+          <div className="flex items-center gap-4 text-[#1e3a8a]">
+            <Mail className="w-6 h-6" />
+            <span className="font-bold text-base">halo@bgn.go.id</span>
           </div>
         </div>
       </div>

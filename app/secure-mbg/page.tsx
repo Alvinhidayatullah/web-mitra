@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import { DashboardConfigs, DashboardState, defaultState } from "@/types/dashboard";
+import { DashboardConfigs, DashboardState, defaultState, ExtendedData } from "@/types/dashboard";
 import { useRouter } from "next/navigation";
 import { Plus, Trash2 } from "lucide-react";
 
@@ -63,7 +63,8 @@ export default function AdminPage() {
                   zoomLevel: item.zoomLevel,
                   label: item.mapLabel
                 }
-              }
+              },
+              extendedData: item.extendedData ? (item.extendedData as unknown as ExtendedData) : undefined
             };
           });
           setConfigs(loadedConfigs);

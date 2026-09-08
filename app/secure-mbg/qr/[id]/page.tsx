@@ -115,19 +115,28 @@ export default function QRCardPage() {
             <path d="M0,0 Q45,75 100,30 L100,100 L0,100 Z" fill="#1e3a8a" />
           </svg>
           
-          <div className="absolute bottom-6 left-0 w-full flex items-center justify-center text-[9px] text-white/90 font-medium z-20">
-            <div className="flex items-center mr-3">
-              <InstagramIcon className="w-3.5 h-3.5 opacity-90 mr-1.5" />
+          <div 
+            className="absolute bottom-6 left-0 w-full z-20 text-[9.5px] text-white/90 font-medium"
+            style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', marginRight: '14px' }}>
+              <div style={{ width: '14px', height: '14px', marginRight: '6px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <InstagramIcon className="w-full h-full opacity-90" />
+              </div>
               <span>badangizinasional.ri</span>
             </div>
-            <span className="opacity-60 text-[8px] mr-3">•</span>
-            <div className="flex items-center mr-3">
-              <FacebookIcon className="w-3.5 h-3.5 fill-current opacity-90 mr-1.5" />
+            <span className="opacity-60 text-[8px]" style={{ marginRight: '14px' }}>•</span>
+            <div style={{ display: 'flex', alignItems: 'center', marginRight: '14px' }}>
+              <div style={{ width: '14px', height: '14px', marginRight: '6px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <FacebookIcon className="w-full h-full fill-current opacity-90" />
+              </div>
               <span>Bgn RI</span>
             </div>
-            <span className="opacity-60 text-[8px] mr-3">•</span>
-            <div className="flex items-center">
-              <Mail className="w-3.5 h-3.5 opacity-90 mr-1.5" />
+            <span className="opacity-60 text-[8px]" style={{ marginRight: '14px' }}>•</span>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <div style={{ width: '14px', height: '14px', marginRight: '6px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <Mail className="w-full h-full opacity-90" />
+              </div>
               <span>halo@bgn.go.id</span>
             </div>
           </div>

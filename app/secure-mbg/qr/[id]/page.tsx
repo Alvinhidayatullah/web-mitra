@@ -7,16 +7,16 @@ import { QRCodeCanvas } from "qrcode.react";
 import html2canvas from "html2canvas";
 import { ArrowLeft, Copy, Mail } from "lucide-react";
 
-const InstagramIcon = ({ className }: { className?: string }) => (
-  <svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+const InstagramIcon = ({ className, size = 14 }: { className?: string, size?: number }) => (
+  <svg className={className} xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
     <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
     <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
   </svg>
 );
 
-const FacebookIcon = ({ className }: { className?: string }) => (
-  <svg className={className} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none" strokeWidth="0" strokeLinecap="round" strokeLinejoin="round">
+const FacebookIcon = ({ className, size = 14 }: { className?: string, size?: number }) => (
+  <svg className={className} xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="currentColor" stroke="none" strokeWidth="0" strokeLinecap="round" strokeLinejoin="round">
     <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
   </svg>
 );
@@ -102,11 +102,11 @@ export default function QRCardPage() {
       >
         {/* Background Accents (Watermarks) */}
         {/* Top Right Concentric Circles */}
-        <div className="absolute top-[-50px] right-[-60px] w-64 h-64 border-[35px] border-slate-100 rounded-full opacity-70 z-0"></div>
-        <div className="absolute top-[20px] right-[-10px] w-40 h-40 border-[20px] border-slate-100 rounded-full opacity-70 z-0"></div>
+        <div className="absolute top-[-50px] right-[-60px] w-64 h-64 border-[35px] rounded-full z-0" style={{ borderColor: 'rgba(241, 245, 249, 0.7)' }}></div>
+        <div className="absolute top-[20px] right-[-10px] w-40 h-40 border-[20px] rounded-full z-0" style={{ borderColor: 'rgba(241, 245, 249, 0.7)' }}></div>
         
         {/* Bottom Left Faint Curves */}
-        <div className="absolute top-[250px] left-[-90px] w-[320px] h-[320px] border-[40px] border-slate-100 rounded-full opacity-60 z-0"></div>
+        <div className="absolute top-[250px] left-[-90px] w-[320px] h-[320px] border-[40px] rounded-full z-0" style={{ borderColor: 'rgba(241, 245, 249, 0.6)' }}></div>
 
         {/* Footer U-shape wave (z-10) */}
         <div className="absolute bottom-0 left-0 w-full h-[220px] z-10">
@@ -116,11 +116,11 @@ export default function QRCardPage() {
           </svg>
           
           <div 
-            className="absolute bottom-6 left-0 w-full z-20 text-[9.5px] text-white/90 font-medium text-center"
+            className="absolute bottom-6 left-0 w-full z-20 text-[9.5px] text-white font-medium text-center"
           >
             <div style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: '14px' }}>
               <div style={{ display: 'inline-block', verticalAlign: 'middle', width: '14px', height: '14px', marginRight: '6px' }}>
-                <InstagramIcon className="w-full h-full opacity-90 block" />
+                <InstagramIcon size={14} className="opacity-90 block" />
               </div>
               <span style={{ display: 'inline-block', verticalAlign: 'middle', lineHeight: '14px' }}>badangizinasional.ri</span>
             </div>
@@ -129,7 +129,7 @@ export default function QRCardPage() {
             
             <div style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: '14px' }}>
               <div style={{ display: 'inline-block', verticalAlign: 'middle', width: '14px', height: '14px', marginRight: '6px' }}>
-                <FacebookIcon className="w-full h-full fill-current opacity-90 block" />
+                <FacebookIcon size={14} className="fill-current opacity-90 block" />
               </div>
               <span style={{ display: 'inline-block', verticalAlign: 'middle', lineHeight: '14px' }}>Bgn RI</span>
             </div>
@@ -138,7 +138,7 @@ export default function QRCardPage() {
             
             <div style={{ display: 'inline-block', verticalAlign: 'middle' }}>
               <div style={{ display: 'inline-block', verticalAlign: 'middle', width: '14px', height: '14px', marginRight: '6px' }}>
-                <Mail className="w-full h-full opacity-90 block" />
+                <Mail size={14} className="opacity-90 block" />
               </div>
               <span style={{ display: 'inline-block', verticalAlign: 'middle', lineHeight: '14px' }}>halo@bgn.go.id</span>
             </div>
@@ -171,7 +171,10 @@ export default function QRCardPage() {
             
             <QRCodeCanvas value={publicUrl} size={170} level="H" />
             
-            <div className="text-[10.5px] text-gray-600 font-semibold mt-4 mb-1 text-center">
+            <div 
+              className="text-[10.5px] text-gray-600 font-semibold text-center"
+              style={{ marginTop: '16px', marginBottom: '4px' }}
+            >
               Pindai QR Code untuk informasi dapur ini
             </div>
           </div>

@@ -116,28 +116,31 @@ export default function QRCardPage() {
           </svg>
           
           <div 
-            className="absolute bottom-6 left-0 w-full z-20 text-[9.5px] text-white/90 font-medium"
-            style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+            className="absolute bottom-6 left-0 w-full z-20 text-[9.5px] text-white/90 font-medium text-center"
           >
-            <div style={{ display: 'flex', alignItems: 'center', marginRight: '14px' }}>
-              <div style={{ width: '14px', height: '14px', marginRight: '6px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <InstagramIcon className="w-full h-full opacity-90" />
+            <div style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: '14px' }}>
+              <div style={{ display: 'inline-block', verticalAlign: 'middle', width: '14px', height: '14px', marginRight: '6px' }}>
+                <InstagramIcon className="w-full h-full opacity-90 block" />
               </div>
-              <span>badangizinasional.ri</span>
+              <span style={{ display: 'inline-block', verticalAlign: 'middle', lineHeight: '14px' }}>badangizinasional.ri</span>
             </div>
-            <span className="opacity-60 text-[8px]" style={{ marginRight: '14px' }}>•</span>
-            <div style={{ display: 'flex', alignItems: 'center', marginRight: '14px' }}>
-              <div style={{ width: '14px', height: '14px', marginRight: '6px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <FacebookIcon className="w-full h-full fill-current opacity-90" />
+            
+            <span className="opacity-60 text-[8px]" style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: '14px', lineHeight: '14px' }}>•</span>
+            
+            <div style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: '14px' }}>
+              <div style={{ display: 'inline-block', verticalAlign: 'middle', width: '14px', height: '14px', marginRight: '6px' }}>
+                <FacebookIcon className="w-full h-full fill-current opacity-90 block" />
               </div>
-              <span>Bgn RI</span>
+              <span style={{ display: 'inline-block', verticalAlign: 'middle', lineHeight: '14px' }}>Bgn RI</span>
             </div>
-            <span className="opacity-60 text-[8px]" style={{ marginRight: '14px' }}>•</span>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              <div style={{ width: '14px', height: '14px', marginRight: '6px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <Mail className="w-full h-full opacity-90" />
+            
+            <span className="opacity-60 text-[8px]" style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: '14px', lineHeight: '14px' }}>•</span>
+            
+            <div style={{ display: 'inline-block', verticalAlign: 'middle' }}>
+              <div style={{ display: 'inline-block', verticalAlign: 'middle', width: '14px', height: '14px', marginRight: '6px' }}>
+                <Mail className="w-full h-full opacity-90 block" />
               </div>
-              <span>halo@bgn.go.id</span>
+              <span style={{ display: 'inline-block', verticalAlign: 'middle', lineHeight: '14px' }}>halo@bgn.go.id</span>
             </div>
           </div>
         </div>

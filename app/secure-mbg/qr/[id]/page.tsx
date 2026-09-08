@@ -104,39 +104,7 @@ export default function QRCardPage() {
         <div className="absolute top-0 right-0 w-40 h-40 bg-slate-50 rounded-full blur-xl opacity-80 z-0 translate-x-10 -translate-y-10"></div>
         <div className="absolute top-20 right-10 w-32 h-32 bg-blue-50 rounded-full blur-2xl opacity-60 z-0"></div>
 
-        {/* Content */}
-        <div className="relative z-10 w-full flex flex-col items-center px-8 h-full">
-          {/* Header Logo (Top Left) */}
-          <div className="w-full flex justify-start mb-6">
-            <div className="flex items-center">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/BGN.png" alt="BGN Logo" className="h-10 object-contain" />
-            </div>
-          </div>
-
-          {/* SPPG & Yayasan Name */}
-          <h1 className="text-[15px] font-black text-center text-gray-900 leading-snug mb-1 uppercase w-full tracking-tight">
-            {data.sppg.namaSPPG}
-          </h1>
-          <h2 className="text-[12px] font-bold text-center text-gray-800 mb-6 uppercase w-full">
-            {data.yayasan.namaYayasan}
-          </h2>
-
-          {/* White Box containing ID SPPG, QR, and Scan Text */}
-          <div className="bg-white p-5 rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.08)] border border-gray-100 flex flex-col items-center w-full max-w-[280px] z-20">
-            <div className="text-[11px] font-bold text-gray-700 mb-3 uppercase tracking-wider">
-              ID SPPG : {data.sppg.idSPPG || "-"}
-            </div>
-            
-            <QRCodeCanvas value={publicUrl} size={180} level="H" />
-            
-            <div className="text-[9px] text-gray-500 font-medium mt-3">
-              Pindai QR Code untuk informasi dapur ini
-            </div>
-          </div>
-        </div>
-
-        {/* Footer wave curve effect using scale */}
+        {/* Footer wave curve effect (z-10) */}
         <div 
           className="absolute bottom-0 left-0 w-full h-[180px] bg-[#1e3a8a] rounded-t-[100%] flex flex-col items-center justify-end pb-8 text-[9px] text-white/90 font-medium z-10" 
           style={{ transform: "scaleX(1.5)", transformOrigin: "bottom center" }}
@@ -155,6 +123,38 @@ export default function QRCardPage() {
             <div className="flex items-center gap-1">
               <Mail className="w-3.5 h-3.5 opacity-80" />
               <span>halo@bgn.go.id</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Content (z-20, sits ON TOP of the wave) */}
+        <div className="relative z-20 w-full flex flex-col items-center px-8 h-full">
+          {/* Header Logo (Top Left) */}
+          <div className="w-full flex justify-start mb-5">
+            <div className="flex items-center">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/BGN.png" alt="BGN Logo" className="h-10 object-contain" />
+            </div>
+          </div>
+
+          {/* SPPG & Yayasan Name */}
+          <h1 className="text-[15px] font-black text-center text-gray-900 leading-snug mb-1 uppercase w-full tracking-tight">
+            {data.sppg.namaSPPG}
+          </h1>
+          <h2 className="text-[12px] font-bold text-center text-gray-800 mb-5 uppercase w-full">
+            {data.yayasan.namaYayasan}
+          </h2>
+
+          {/* White Box containing ID SPPG, QR, and Scan Text */}
+          <div className="bg-white p-5 rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.1)] border border-gray-100 flex flex-col items-center w-full max-w-[280px]">
+            <div className="text-[12px] font-bold text-gray-700 mb-3 uppercase tracking-wider">
+              ID SPPG : {data.sppg.idSPPG || "-"}
+            </div>
+            
+            <QRCodeCanvas value={publicUrl} size={170} level="H" />
+            
+            <div className="text-[10px] text-gray-500 font-medium mt-3">
+              Pindai QR Code untuk informasi dapur ini
             </div>
           </div>
         </div>

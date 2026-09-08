@@ -5,21 +5,9 @@ import { useParams, useRouter } from "next/navigation";
 import { DashboardState } from "@/types/dashboard";
 import { QRCodeCanvas } from "qrcode.react";
 import html2canvas from "html2canvas";
-import { ArrowLeft, Copy, Mail } from "lucide-react";
+import { ArrowLeft, Copy } from "lucide-react";
 
-const InstagramIcon = ({ className, size = 14 }: { className?: string, size?: number }) => (
-  <svg className={className} xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
-    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
-  </svg>
-);
-
-const FacebookIcon = ({ className, size = 14 }: { className?: string, size?: number }) => (
-  <svg className={className} xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="currentColor" stroke="none" strokeWidth="0" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-  </svg>
-);
+/* eslint-disable @next/next/no-img-element */
 
 export default function QRCardPage() {
   const params = useParams();
@@ -120,7 +108,7 @@ export default function QRCardPage() {
           >
             <div style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: '14px' }}>
               <div style={{ display: 'inline-block', verticalAlign: 'middle', width: '14px', height: '14px', marginRight: '6px' }}>
-                <InstagramIcon size={14} className="opacity-90 block" />
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiB4PSIyIiB5PSIyIiByeD0iNSIgcnk9IjUiLz48cGF0aCBkPSJNMTYgMTEuMzdBNCA0IDAgMSAxIDEyLjYzIDggNCA0IDAgMCAxIDE2IDExLjM3eiIvPjxsaW5lIHgxPSIxNy41IiB4Mj0iMTcuNTEiIHkxPSI2LjUiIHkyPSI2LjUiLz48L3N2Zz4=" width="14" height="14" style={{ display: 'block', width: '14px', height: '14px', opacity: 0.9 }} alt="IG" />
               </div>
               <span style={{ display: 'inline-block', verticalAlign: 'middle', lineHeight: '14px' }}>badangizinasional.ri</span>
             </div>
@@ -129,7 +117,7 @@ export default function QRCardPage() {
             
             <div style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: '14px' }}>
               <div style={{ display: 'inline-block', verticalAlign: 'middle', width: '14px', height: '14px', marginRight: '6px' }}>
-                <FacebookIcon size={14} className="fill-current opacity-90 block" />
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjAiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTE4IDJoLTNhNSA1IDAgMCAwLTUgNXYzSDd2NGgzdjhoNHYtOGgzbDEtNGgtNFY3YTEgMSAwIDAgMSAxLTFoM3oiLz48L3N2Zz4=" width="14" height="14" style={{ display: 'block', width: '14px', height: '14px', opacity: 0.9 }} alt="FB" />
               </div>
               <span style={{ display: 'inline-block', verticalAlign: 'middle', lineHeight: '14px' }}>Bgn RI</span>
             </div>
@@ -138,7 +126,7 @@ export default function QRCardPage() {
             
             <div style={{ display: 'inline-block', verticalAlign: 'middle' }}>
               <div style={{ display: 'inline-block', verticalAlign: 'middle', width: '14px', height: '14px', marginRight: '6px' }}>
-                <Mail size={14} className="opacity-90 block" />
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjE2IiB4PSIyIiB5PSI0IiByeD0iMiIvPjxwYXRoIGQ9Im0yMiA3LTguOTcgNS43YTEuOTQgMS45NCAwIDAgMS0yLjA2IDBMMiA3Ii8+PC9zdmc+" width="14" height="14" style={{ display: 'block', width: '14px', height: '14px', opacity: 0.9 }} alt="Mail" />
               </div>
               <span style={{ display: 'inline-block', verticalAlign: 'middle', lineHeight: '14px' }}>halo@bgn.go.id</span>
             </div>

@@ -95,55 +95,52 @@ export default function QRCardPage() {
 
       <div 
         ref={cardRef} 
-        className="w-[400px] bg-white shadow-xl relative flex flex-col items-center pt-8 pb-8"
-        style={{ minHeight: '650px' }} 
+        className="w-[450px] aspect-[1/1.414] bg-white shadow-2xl relative flex flex-col items-center pt-10 pb-6 px-6"
+        style={{ minHeight: '636px' }} 
       >
-        {/* Top Logo - White Background */}
-        <div className="w-full flex justify-center mb-6 px-10">
+        {/* Top Logo */}
+        <div className="w-full flex justify-center mb-8">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/BGN.png" alt="BGN Logo" className="w-[85%] object-contain" />
+          <img src="/BGN.png" alt="BGN Logo" className="w-[65%] object-contain" />
         </div>
 
-        {/* Kotak Biru Utama (Card) */}
-        <div className="w-[90%] bg-[#1e3a8a] rounded-[2rem] shadow-xl p-8 flex flex-col items-center mb-auto">
+        {/* Kotak Biru Utama */}
+        <div className="w-full bg-[#1e3a8a] rounded-3xl p-8 flex flex-col items-center shadow-lg">
           
-          <h2 className="text-[#fbbf24] text-2xl font-black italic tracking-wider mb-1">PINDAI DISINI</h2>
-          <p className="text-white text-sm font-bold tracking-widest mb-6">UNTUK MELIHAT DETAIL</p>
+          <h2 className="text-[#fbbf24] text-[28px] font-black italic tracking-widest mb-1">PINDAI DISINI</h2>
+          <p className="text-white text-[13px] font-bold tracking-widest mb-8">UNTUK MELIHAT DETAIL</p>
           
-          {/* QR Code Container */}
-          <div className="bg-white p-3 rounded-2xl mb-6 shadow-inner border-[3px] border-[#3b82f6]">
+          {/* QR Code Container (Clean White Box) */}
+          <div className="bg-white p-4 rounded-xl mb-8">
             <QRCodeCanvas value={publicUrl} size={180} level="H" />
           </div>
           
-          {/* Info Text */}
-          <div className="w-full flex flex-col gap-2 text-center text-white">
-            <div className="font-bold text-sm uppercase">SATPEL : {data.sppg.namaSPPG}</div>
-            <div className="font-bold text-xs uppercase">Mitra : {data.yayasan.namaYayasan}</div>
-            
-            <div className="mt-3 font-bold text-sm uppercase">
-              ID SPPG : {data.sppg.idSPPG || "-"}
-            </div>
+          {/* Info Text (All plain text, centered) */}
+          <div className="w-full flex flex-col gap-1.5 text-center text-white">
+            <div className="font-bold text-[13px] uppercase tracking-wide">SATPEL : {data.sppg.namaSPPG}</div>
+            <div className="font-bold text-[13px] uppercase tracking-wide">MITRA : {data.yayasan.namaYayasan}</div>
+            <div className="font-bold text-[13px] uppercase tracking-wide mt-1">ID SPPG : {data.sppg.idSPPG || "-"}</div>
           </div>
         </div>
 
-        {/* Spacer */}
-        <div className="h-6"></div>
+        {/* Spacer to push socials to bottom */}
+        <div className="flex-grow"></div>
 
-        {/* Footer Socials - Horizontal */}
-        <div className="w-full px-4 flex items-center justify-center gap-4 mt-auto">
+        {/* Footer Socials */}
+        <div className="w-full flex items-center justify-center gap-5 mt-6">
           <div className="flex items-center gap-1.5 text-[#1e3a8a]">
-            <InstagramIcon className="w-4 h-4" />
-            <span className="font-bold text-[10px] tracking-wide">@badangizinasional</span>
+            <InstagramIcon className="w-[18px] h-[18px]" />
+            <span className="font-bold text-[11px] tracking-tight">@badangizinasional</span>
           </div>
           
           <div className="flex items-center gap-1.5 text-[#1e3a8a]">
-            <FacebookIcon className="w-4 h-4 fill-current" />
-            <span className="font-bold text-[10px] tracking-wide">@badangizinasional</span>
+            <FacebookIcon className="w-[18px] h-[18px] fill-current" />
+            <span className="font-bold text-[11px] tracking-tight">@badangizinasional</span>
           </div>
           
           <div className="flex items-center gap-1.5 text-[#1e3a8a]">
-            <Mail className="w-4 h-4" />
-            <span className="font-bold text-[10px] tracking-wide">www.gizinasional.go.id</span>
+            <Mail className="w-[18px] h-[18px]" />
+            <span className="font-bold text-[11px] tracking-tight">www.gizinasional.go.id</span>
           </div>
         </div>
       </div>

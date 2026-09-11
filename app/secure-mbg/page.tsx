@@ -27,6 +27,7 @@ export default function AdminPage() {
   const [activeId, setActiveId] = useState<string>("");
   const [mounted, setMounted] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
   
   useEffect(() => {
@@ -75,12 +76,14 @@ export default function AdminPage() {
           setConfigs({ [newId]: defaultState });
           setActiveId(newId);
         }
+        setIsLoading(false);
       })
       .catch(e => {
         console.error("Failed to load configs", e);
         const newId = generateUUID();
         setConfigs({ [newId]: defaultState });
         setActiveId(newId);
+        setIsLoading(false);
       });
   }, []);
 
@@ -252,6 +255,15 @@ export default function AdminPage() {
             </button>
           </div>
         </form>
+      </div>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4 text-center">
+        <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+        <p className="text-gray-600 font-semibold">Memuat Data Konfigurasi...</p>
       </div>
     );
   }

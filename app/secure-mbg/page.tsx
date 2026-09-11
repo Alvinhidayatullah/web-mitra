@@ -523,10 +523,10 @@ export default function AdminPage() {
               <input 
                 type="number" 
                 step="any"
-                value={activeData.sppg.location.latitude} 
+                value={activeData.sppg.location.latitude === 0 ? 0 : (activeData.sppg.location.latitude || "")} 
                 onChange={e => {
-                  const val = parseFloat(e.target.value);
-                  updateSPPG("location", { ...activeData.sppg.location, latitude: isNaN(val) ? 0 : val });
+                  const val = e.target.value === "" ? ("" as unknown as number) : parseFloat(e.target.value);
+                  updateSPPG("location", { ...activeData.sppg.location, latitude: val });
                 }}
                 className="w-full border p-2 rounded-lg mt-1" 
               />
@@ -536,10 +536,10 @@ export default function AdminPage() {
               <input 
                 type="number" 
                 step="any"
-                value={activeData.sppg.location.longitude} 
+                value={activeData.sppg.location.longitude === 0 ? 0 : (activeData.sppg.location.longitude || "")} 
                 onChange={e => {
-                  const val = parseFloat(e.target.value);
-                  updateSPPG("location", { ...activeData.sppg.location, longitude: isNaN(val) ? 0 : val });
+                  const val = e.target.value === "" ? ("" as unknown as number) : parseFloat(e.target.value);
+                  updateSPPG("location", { ...activeData.sppg.location, longitude: val });
                 }}
                 className="w-full border p-2 rounded-lg mt-1" 
               />

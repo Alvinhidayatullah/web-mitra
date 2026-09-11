@@ -54,9 +54,14 @@ export default function InteractiveMap({
     return <div className="w-full h-full bg-gray-200 animate-pulse flex items-center justify-center">Loading Map...</div>;
   }
 
-  const safeLat = isNaN(lat) ? 0 : lat;
-  const safeLng = isNaN(lng) ? 0 : lng;
-  const safeZoom = isNaN(zoom) ? 13 : zoom;
+  const numLat = typeof lat === "string" ? parseFloat(lat) : lat;
+  const safeLat = typeof numLat === "number" && Number.isFinite(numLat) ? numLat : 0;
+
+  const numLng = typeof lng === "string" ? parseFloat(lng) : lng;
+  const safeLng = typeof numLng === "number" && Number.isFinite(numLng) ? numLng : 0;
+
+  const numZoom = typeof zoom === "string" ? parseFloat(zoom) : zoom;
+  const safeZoom = typeof numZoom === "number" && Number.isFinite(numZoom) ? numZoom : 13;
 
   return (
     <MapContainer

@@ -524,7 +524,10 @@ export default function AdminPage() {
                 type="number" 
                 step="any"
                 value={activeData.sppg.location.latitude} 
-                onChange={e => updateSPPG("location", { ...activeData.sppg.location, latitude: parseFloat(e.target.value) })}
+                onChange={e => {
+                  const val = parseFloat(e.target.value);
+                  updateSPPG("location", { ...activeData.sppg.location, latitude: isNaN(val) ? 0 : val });
+                }}
                 className="w-full border p-2 rounded-lg mt-1" 
               />
             </div>
@@ -534,7 +537,10 @@ export default function AdminPage() {
                 type="number" 
                 step="any"
                 value={activeData.sppg.location.longitude} 
-                onChange={e => updateSPPG("location", { ...activeData.sppg.location, longitude: parseFloat(e.target.value) })}
+                onChange={e => {
+                  const val = parseFloat(e.target.value);
+                  updateSPPG("location", { ...activeData.sppg.location, longitude: isNaN(val) ? 0 : val });
+                }}
                 className="w-full border p-2 rounded-lg mt-1" 
               />
             </div>

@@ -54,10 +54,14 @@ export default function InteractiveMap({
     return <div className="w-full h-full bg-gray-200 animate-pulse flex items-center justify-center">Loading Map...</div>;
   }
 
+  const safeLat = isNaN(lat) ? 0 : lat;
+  const safeLng = isNaN(lng) ? 0 : lng;
+  const safeZoom = isNaN(zoom) ? 13 : zoom;
+
   return (
     <MapContainer
-      center={[lat, lng]}
-      zoom={zoom}
+      center={[safeLat, safeLng]}
+      zoom={safeZoom}
       scrollWheelZoom={true}
       style={{ height: "100%", width: "100%" }}
     >
@@ -66,7 +70,7 @@ export default function InteractiveMap({
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       
-      <Marker position={[lat, lng]} icon={icon}>
+      <Marker position={[safeLat, safeLng]} icon={icon}>
         <Tooltip direction="top" permanent className="font-bold text-black">
           {label}
         </Tooltip>

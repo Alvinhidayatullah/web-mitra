@@ -235,6 +235,8 @@ export default function AdminPage() {
       pic: { ...defaultExtObj.pic, ...(rawExt.pic || {}) },
       kasatpel: { ...defaultExtObj.kasatpel, ...(rawExt.kasatpel || {}) },
       mitra: { ...defaultExtObj.mitra, ...(rawExt.mitra || {}) },
+    };
+
     const rowData = {
       "Username": "",
       "ID SPPG": data.sppg.idSPPG,

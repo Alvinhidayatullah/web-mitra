@@ -246,6 +246,8 @@ export default function AdminPage() {
       "Tanggal Operasional/Rencana": extObj.tglOperasional,
       "Kode SPPG": extObj.kodeSppg,
       "Nama SPPG": data.sppg.namaSPPG,
+      "Yayasan Terkait": data.sppg.yayasanTerkait,
+      "Status Badge": data.sppg.statusBadge,
       "Provinsi": extObj.provinsiSppg,
       "Kab./Kota": extObj.kabKotaSppg,
       "Kecamatan": extObj.kecamatanSppg,
@@ -254,11 +256,15 @@ export default function AdminPage() {
       "Kode Pos": extObj.kodePosSppg,
       "Latitude": data.sppg.location.latitude,
       "Longitude": data.sppg.location.longitude,
+      "Label Peta": data.sppg.location.label,
       "Jenis / Asal Bangunan SPPG": extObj.jenisBangunanSppg,
       "Jenis SPPG": extObj.jenisSppg,
       "Nama Kasatpel": extObj.kasatpel.namaKasatpel,
       "Email Kasatpel": extObj.kasatpel.emailKasatpel,
       "No. HP Kasatpel": extObj.kasatpel.noHpKasatpel,
+      "NIK Kasatpel": extObj.kasatpel.nikKasatpel,
+      "Nomor SKEP Kasatpel": extObj.kasatpel.noSkepKasatpel,
+      "Tanggal SKEP Kasatpel": extObj.kasatpel.tglSkepKasatpel,
       "Jenis Mitra/Instansi": extObj.mitra.jenisMitra,
       "Nama Mitra/Instansi": extObj.mitra.namaMitra,
       "Nama Pimpinan": extObj.mitra.namaPimpinanMitra,
@@ -272,15 +278,16 @@ export default function AdminPage() {
       "Alamat Mitra": extObj.mitra.alamatMitra,
       "Kode Pos Mitra": extObj.mitra.kodePosMitra,
       "Nama Yayasan": data.yayasan.namaYayasan,
+      "ID Mitra": data.yayasan.idMitra,
       "NPWP Yayasan": data.yayasan.npwp,
+      "Nomor Ponsel Yayasan": data.yayasan.nomorPonsel,
+      "Email Yayasan": data.yayasan.email,
       "Provinsi Yayasan": extObj.provinsiYayasan,
       "Kab./Kota Yayasan": extObj.kabKotaYayasan,
       "Kecamatan Yayasan": extObj.kecamatanYayasan,
       "Kelurahan/Desa Yayasan": extObj.kelurahanDesaYayasan,
       "Alamat Yayasan": extObj.alamatYayasan,
       "Kode Pos Yayasan": extObj.kodePosYayasan,
-      "Email Yayasan": data.yayasan.email,
-      "Telepon/HP Yayasan": data.yayasan.nomorPonsel,
       "Nama Bank": extObj.bank.namaBank,
       "Nomor Rekening": extObj.bank.noRekening,
       "Nama Pemilik Rekening": extObj.bank.namaPemilikRekening,
@@ -294,11 +301,15 @@ export default function AdminPage() {
     };
 
     try {
+      const pageIndex = Object.keys(configs).indexOf(activeId) + 1;
+      const safeYayasanName = data.yayasan.namaYayasan ? data.yayasan.namaYayasan.replace(/[^a-zA-Z0-9]/g, '_') : 'Yayasan';
+      const fileName = `Export_Halaman_${pageIndex}_${safeYayasanName}.xlsx`;
+
       const XLSX = await import("xlsx");
       const worksheet = XLSX.utils.json_to_sheet([rowData]);
       const workbook = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(workbook, worksheet, "Data Konfigurasi");
-      XLSX.writeFile(workbook, `Data_${data.sppg.namaSPPG ? data.sppg.namaSPPG.replace(/\s+/g, '_') : 'SPPG'}.xlsx`);
+      XLSX.utils.book_append_sheet(workbook, worksheet, `Halaman ${pageIndex}`);
+      XLSX.writeFile(workbook, fileName);
     } catch (error) {
       console.error("Gagal mengekspor ke Excel:", error);
       alert("Gagal mengekspor data ke Excel.");

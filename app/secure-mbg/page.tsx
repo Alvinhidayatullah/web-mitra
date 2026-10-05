@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { DashboardConfigs, DashboardState, defaultState, ExtendedData } from "@/types/dashboard";
 import { useRouter } from "next/navigation";
-import { Plus, Trash2, Copy } from "lucide-react";
+import { Plus, Trash2, Copy, Download } from "lucide-react";
 
 const InteractiveMap = dynamic(() => import("@/components/InteractiveMap"), {
   ssr: false,
@@ -222,6 +222,89 @@ export default function AdminPage() {
     }));
   };
 
+  const handleExportExcel = async () => {
+    if (!activeId || !configs[activeId]) return;
+    const data = configs[activeId];
+    
+    const rawExt = data.extendedData || ({} as Partial<ExtendedData>);
+    const defaultExtObj = { noBaVerval: '', tglBaVerval: '', statusOperasional: 'Beroperasi', tglOperasional: '', kodeSppg: '', provinsiSppg: '', kabKotaSppg: '', kecamatanSppg: '', kelurahanDesaSppg: '', alamatSppg: '', kodePosSppg: '', jenisBangunanSppg: '', jenisSppg: '', provinsiYayasan: '', kabKotaYayasan: '', kecamatanYayasan: '', kelurahanDesaYayasan: '', alamatYayasan: '', kodePosYayasan: '', bank: {namaBank:'', noRekening:'', namaPemilikRekening:'', namaBankVA:'', noVA:'', namaVA:''}, pic: {namaPic:'', nikPic:'', emailPic:'', noHpPic:''}, kasatpel: {namaKasatpel:'', emailKasatpel:'', noHpKasatpel:'', nikKasatpel:'', noSkepKasatpel:'', tglSkepKasatpel:''}, mitra: {jenisMitra:'', namaMitra:'', namaPimpinanMitra:'', noHpMitra:'', emailMitra:'', bentukDukunganMitra:'', provinsiMitra:'', kabKotaMitra:'', kecamatanMitra:'', kelurahanDesaMitra:'', alamatMitra:'', kodePosMitra:''} };
+    const extObj = {
+      ...defaultExtObj,
+      ...rawExt,
+      bank: { ...defaultExtObj.bank, ...(rawExt.bank || {}) },
+      pic: { ...defaultExtObj.pic, ...(rawExt.pic || {}) },
+      kasatpel: { ...defaultExtObj.kasatpel, ...(rawExt.kasatpel || {}) },
+      mitra: { ...defaultExtObj.mitra, ...(rawExt.mitra || {}) },
+    };
+
+    const rowData = {
+      "Username": "",
+      "ID SPPG": data.sppg.idSPPG,
+      "Nomor BA. Verval": extObj.noBaVerval,
+      "Tanggal BA. Verval": extObj.tglBaVerval,
+      "Status Operasional": extObj.statusOperasional,
+      "Tanggal Operasional/Rencana": extObj.tglOperasional,
+      "Kode SPPG": extObj.kodeSppg,
+      "Nama SPPG": data.sppg.namaSPPG,
+      "Provinsi": extObj.provinsiSppg,
+      "Kab./Kota": extObj.kabKotaSppg,
+      "Kecamatan": extObj.kecamatanSppg,
+      "Kelurahan/Desa": extObj.kelurahanDesaSppg,
+      "Alamat": extObj.alamatSppg,
+      "Kode Pos": extObj.kodePosSppg,
+      "Latitude": data.sppg.location.latitude,
+      "Longitude": data.sppg.location.longitude,
+      "Jenis / Asal Bangunan SPPG": extObj.jenisBangunanSppg,
+      "Jenis SPPG": extObj.jenisSppg,
+      "Nama Kasatpel": extObj.kasatpel.namaKasatpel,
+      "Email Kasatpel": extObj.kasatpel.emailKasatpel,
+      "No. HP Kasatpel": extObj.kasatpel.noHpKasatpel,
+      "Jenis Mitra/Instansi": extObj.mitra.jenisMitra,
+      "Nama Mitra/Instansi": extObj.mitra.namaMitra,
+      "Nama Pimpinan": extObj.mitra.namaPimpinanMitra,
+      "No. HP Mitra": extObj.mitra.noHpMitra,
+      "Email Mitra": extObj.mitra.emailMitra,
+      "Bentuk Dukungan/Aset Mitra": extObj.mitra.bentukDukunganMitra,
+      "Provinsi Mitra": extObj.mitra.provinsiMitra,
+      "Kab./Kota Mitra": extObj.mitra.kabKotaMitra,
+      "Kecamatan Mitra": extObj.mitra.kecamatanMitra,
+      "Kelurahan/Desa Mitra": extObj.mitra.kelurahanDesaMitra,
+      "Alamat Mitra": extObj.mitra.alamatMitra,
+      "Kode Pos Mitra": extObj.mitra.kodePosMitra,
+      "Nama Yayasan": data.yayasan.namaYayasan,
+      "NPWP Yayasan": data.yayasan.npwp,
+      "Provinsi Yayasan": extObj.provinsiYayasan,
+      "Kab./Kota Yayasan": extObj.kabKotaYayasan,
+      "Kecamatan Yayasan": extObj.kecamatanYayasan,
+      "Kelurahan/Desa Yayasan": extObj.kelurahanDesaYayasan,
+      "Alamat Yayasan": extObj.alamatYayasan,
+      "Kode Pos Yayasan": extObj.kodePosYayasan,
+      "Email Yayasan": data.yayasan.email,
+      "Telepon/HP Yayasan": data.yayasan.nomorPonsel,
+      "Nama Bank": extObj.bank.namaBank,
+      "Nomor Rekening": extObj.bank.noRekening,
+      "Nama Pemilik Rekening": extObj.bank.namaPemilikRekening,
+      "Nama Bank Virtual Account": extObj.bank.namaBankVA,
+      "Nomor Virtual Account": extObj.bank.noVA,
+      "Nama Virtual Account": extObj.bank.namaVA,
+      "Nama Perwakilan": extObj.pic.namaPic,
+      "NIK Perwakilan": extObj.pic.nikPic,
+      "Email Perwakilan": extObj.pic.emailPic,
+      "No. HP Perwakilan": extObj.pic.noHpPic
+    };
+
+    try {
+      const XLSX = await import("xlsx");
+      const worksheet = XLSX.utils.json_to_sheet([rowData]);
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, worksheet, "Data Konfigurasi");
+      XLSX.writeFile(workbook, `Data_${data.sppg.namaSPPG ? data.sppg.namaSPPG.replace(/\s+/g, '_') : 'SPPG'}.xlsx`);
+    } catch (error) {
+      console.error("Gagal mengekspor ke Excel:", error);
+      alert("Gagal mengekspor data ke Excel.");
+    }
+  };
+
   if (!mounted) return null;
 
   if (!isAuthenticated) {
@@ -290,6 +373,13 @@ export default function AdminPage() {
       <header className="bg-white shadow-sm p-4 flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-0 sticky top-0 z-50">
         <h1 className="text-lg sm:text-xl font-bold text-center sm:text-left">Admin - Manajemen Multi-Konfigurasi</h1>
         <div className="flex w-full sm:w-auto justify-center sm:justify-end gap-2 sm:gap-4">
+          <button 
+            onClick={handleExportExcel}
+            className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-semibold transition"
+          >
+            <Download className="w-4 h-4" />
+            <span className="hidden sm:inline">Export Excel</span>
+          </button>
           <button 
             onClick={handleSave} 
             disabled={isSaving}

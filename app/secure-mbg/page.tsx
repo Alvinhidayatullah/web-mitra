@@ -237,68 +237,35 @@ export default function AdminPage() {
       mitra: { ...defaultExtObj.mitra, ...(rawExt.mitra || {}) },
     };
 
-    const rowData = {
-      "Username": "",
-      "ID SPPG": data.sppg.idSPPG,
-      "Nomor BA. Verval": extObj.noBaVerval,
-      "Tanggal BA. Verval": extObj.tglBaVerval,
-      "Status Operasional": extObj.statusOperasional,
-      "Tanggal Operasional/Rencana": extObj.tglOperasional,
-      "Kode SPPG": extObj.kodeSppg,
-      "Nama SPPG": data.sppg.namaSPPG,
-      "Yayasan Terkait": data.sppg.yayasanTerkait,
-      "Status Badge": data.sppg.statusBadge,
-      "Provinsi": extObj.provinsiSppg,
-      "Kab./Kota": extObj.kabKotaSppg,
-      "Kecamatan": extObj.kecamatanSppg,
-      "Kelurahan/Desa": extObj.kelurahanDesaSppg,
-      "Alamat": extObj.alamatSppg,
-      "Kode Pos": extObj.kodePosSppg,
-      "Latitude": data.sppg.location.latitude,
-      "Longitude": data.sppg.location.longitude,
-      "Label Peta": data.sppg.location.label,
-      "Jenis / Asal Bangunan SPPG": extObj.jenisBangunanSppg,
-      "Jenis SPPG": extObj.jenisSppg,
-      "Nama Kasatpel": extObj.kasatpel.namaKasatpel,
-      "Email Kasatpel": extObj.kasatpel.emailKasatpel,
-      "No. HP Kasatpel": extObj.kasatpel.noHpKasatpel,
-      "NIK Kasatpel": extObj.kasatpel.nikKasatpel,
-      "Nomor SKEP Kasatpel": extObj.kasatpel.noSkepKasatpel,
-      "Tanggal SKEP Kasatpel": extObj.kasatpel.tglSkepKasatpel,
-      "Jenis Mitra/Instansi": extObj.mitra.jenisMitra,
-      "Nama Mitra/Instansi": extObj.mitra.namaMitra,
-      "Nama Pimpinan": extObj.mitra.namaPimpinanMitra,
-      "No. HP Mitra": extObj.mitra.noHpMitra,
-      "Email Mitra": extObj.mitra.emailMitra,
-      "Bentuk Dukungan/Aset Mitra": extObj.mitra.bentukDukunganMitra,
-      "Provinsi Mitra": extObj.mitra.provinsiMitra,
-      "Kab./Kota Mitra": extObj.mitra.kabKotaMitra,
-      "Kecamatan Mitra": extObj.mitra.kecamatanMitra,
-      "Kelurahan/Desa Mitra": extObj.mitra.kelurahanDesaMitra,
-      "Alamat Mitra": extObj.mitra.alamatMitra,
-      "Kode Pos Mitra": extObj.mitra.kodePosMitra,
-      "Nama Yayasan": data.yayasan.namaYayasan,
-      "ID Mitra": data.yayasan.idMitra,
-      "NPWP Yayasan": data.yayasan.npwp,
-      "Nomor Ponsel Yayasan": data.yayasan.nomorPonsel,
-      "Email Yayasan": data.yayasan.email,
-      "Provinsi Yayasan": extObj.provinsiYayasan,
-      "Kab./Kota Yayasan": extObj.kabKotaYayasan,
-      "Kecamatan Yayasan": extObj.kecamatanYayasan,
-      "Kelurahan/Desa Yayasan": extObj.kelurahanDesaYayasan,
-      "Alamat Yayasan": extObj.alamatYayasan,
-      "Kode Pos Yayasan": extObj.kodePosYayasan,
-      "Nama Bank": extObj.bank.namaBank,
-      "Nomor Rekening": extObj.bank.noRekening,
-      "Nama Pemilik Rekening": extObj.bank.namaPemilikRekening,
-      "Nama Bank Virtual Account": extObj.bank.namaBankVA,
-      "Nomor Virtual Account": extObj.bank.noVA,
-      "Nama Virtual Account": extObj.bank.namaVA,
-      "Nama Perwakilan": extObj.pic.namaPic,
-      "NIK Perwakilan": extObj.pic.nikPic,
-      "Email Perwakilan": extObj.pic.emailPic,
-      "No. HP Perwakilan": extObj.pic.noHpPic
-    };
+    const headers = [
+      // Identitas SPPG
+      "ID SPPG", "Nomor BA. Verval", "Tanggal BA. Verval", "Status Operasional", "Tanggal Operasional/Rencana", "Kode SPPG", "Nama SPPG", "Provinsi", "Kab./Kota", "Kecamatan", "Kelurahan/Desa", "Alamat", "Kode Pos", "Posisi Latitude", "Posisi Longitude", "Jenis / Asal Bangunan SPPG", "Jenis SPPG",
+      // Data SPPI/Kasatpel/Ka SPPG
+      "Nama", "Email", "No. HP/Telepon",
+      // Identitas Mitra
+      "Jenis Mitra/Instansi", "Nama Mitra/Instansi", "Nama Pimpinan", "No. HP/Telepon", "e-mail", "Bentuk dukungan/kepemilikan aset Mitra", "Provinsi", "Kab./Kota", "Kecamatan", "Kelurahan/Desa", "Alamat", "Kode Pos",
+      // Identitas Mitra/Yayasan
+      "Nama Mitra/Yayasan", "NPWP", "Provinsi", "Kab./Kota", "Kecamatan", "Kelurahan/Desa", "Alamat", "Kode Pos", "Email", "Telepon/HP",
+      // Data Bank/Rekening
+      "Nama Bank", "Nomor Rekening", "Nama Pemilik Rekening", "Nama Bank Virtual Account", "Nomor Virtual Account", "Nama Virtual Account",
+      // Data Perwakilan Yayasan di SPPG
+      "Nama Perwakilan", "NIK", "Email", "No. HP/Telepon"
+    ];
+
+    const row = [
+      // Identitas SPPG
+      data.sppg.idSPPG, extObj.noBaVerval, extObj.tglBaVerval, extObj.statusOperasional, extObj.tglOperasional, extObj.kodeSppg, data.sppg.namaSPPG, extObj.provinsiSppg, extObj.kabKotaSppg, extObj.kecamatanSppg, extObj.kelurahanDesaSppg, extObj.alamatSppg, extObj.kodePosSppg, data.sppg.location.latitude, data.sppg.location.longitude, extObj.jenisBangunanSppg, extObj.jenisSppg,
+      // Data SPPI/Kasatpel/Ka SPPG
+      extObj.kasatpel.namaKasatpel, extObj.kasatpel.emailKasatpel, extObj.kasatpel.noHpKasatpel,
+      // Identitas Mitra
+      extObj.mitra.jenisMitra, extObj.mitra.namaMitra, extObj.mitra.namaPimpinanMitra, extObj.mitra.noHpMitra, extObj.mitra.emailMitra, extObj.mitra.bentukDukunganMitra, extObj.mitra.provinsiMitra, extObj.mitra.kabKotaMitra, extObj.mitra.kecamatanMitra, extObj.mitra.kelurahanDesaMitra, extObj.mitra.alamatMitra, extObj.mitra.kodePosMitra,
+      // Identitas Mitra/Yayasan
+      data.yayasan.namaYayasan, data.yayasan.npwp, extObj.provinsiYayasan, extObj.kabKotaYayasan, extObj.kecamatanYayasan, extObj.kelurahanDesaYayasan, extObj.alamatYayasan, extObj.kodePosYayasan, data.yayasan.email, data.yayasan.nomorPonsel,
+      // Data Bank/Rekening
+      extObj.bank.namaBank, extObj.bank.noRekening, extObj.bank.namaPemilikRekening, extObj.bank.namaBankVA, extObj.bank.noVA, extObj.bank.namaVA,
+      // Data Perwakilan Yayasan di SPPG
+      extObj.pic.namaPic, extObj.pic.nikPic, extObj.pic.emailPic, extObj.pic.noHpPic
+    ];
 
     try {
       const pageIndex = Object.keys(configs).indexOf(activeId) + 1;
@@ -306,7 +273,7 @@ export default function AdminPage() {
       const fileName = `Export_Halaman_${pageIndex}_${safeYayasanName}.xlsx`;
 
       const XLSX = await import("xlsx");
-      const worksheet = XLSX.utils.json_to_sheet([rowData]);
+      const worksheet = XLSX.utils.aoa_to_sheet([headers, row]);
       const workbook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(workbook, worksheet, `Halaman ${pageIndex}`);
       XLSX.writeFile(workbook, fileName);

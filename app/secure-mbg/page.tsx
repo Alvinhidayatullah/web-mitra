@@ -238,6 +238,7 @@ export default function AdminPage() {
     };
 
     const headers = [
+      "Username",
       // Identitas SPPG
       "ID SPPG", "Nomor BA. Verval", "Tanggal BA. Verval", "Status Operasional", "Tanggal Operasional/Rencana", "Kode SPPG", "Nama SPPG", "Provinsi", "Kab./Kota", "Kecamatan", "Kelurahan/Desa", "Alamat", "Kode Pos", "Posisi Latitude", "Posisi Longitude", "Jenis / Asal Bangunan SPPG", "Jenis SPPG",
       // Data SPPI/Kasatpel/Ka SPPG
@@ -253,6 +254,7 @@ export default function AdminPage() {
     ];
 
     const row = [
+      "", // Username
       // Identitas SPPG
       data.sppg.idSPPG, extObj.noBaVerval, extObj.tglBaVerval, extObj.statusOperasional, extObj.tglOperasional, extObj.kodeSppg, data.sppg.namaSPPG, extObj.provinsiSppg, extObj.kabKotaSppg, extObj.kecamatanSppg, extObj.kelurahanDesaSppg, extObj.alamatSppg, extObj.kodePosSppg, data.sppg.location.latitude, data.sppg.location.longitude, extObj.jenisBangunanSppg, extObj.jenisSppg,
       // Data SPPI/Kasatpel/Ka SPPG
